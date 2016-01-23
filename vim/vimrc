@@ -1,0 +1,300 @@
+" Vundle config begin 
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'tpope/vim-fugitive'
+Plugin 'git://git.wincent.com/command-t.git'
+" The sparkup vim script is in a subdirectory of this repo called vim.
+" Pass the path to set the runtimepath properly.
+Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+" Avoid a name conflict with L9
+Plugin 'user/L9', {'name': 'newL9'}
+" UltiSnips
+" Track the engine.
+Plugin 'SirVer/ultisnips'
+
+" Snippets are separated from the engine. Add this if you want them:
+Plugin 'honza/vim-snippets'
+" SuperTab
+Plugin 'ervandew/supertab'
+Plugin 'kchmck/vim-coffee-script'
+" YCM
+Bundle 'Valloric/YouCompleteMe'
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
+"
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line
+
+" Vundle config end
+" Vim configuration file
+" No toolbar/scrollbars and other crap
+set guioptions=aem
+set nowrap
+set esckeys
+set scrolloff=2
+" Font
+if has('gui_running')
+    set guifont=Source\ Code\ Pro\ for\ Powerline\ Medium\ 10
+endif
+" Settings for lightline
+let g:lightline = {
+            \ 'colorscheme': 'powerline',
+            \ 'active': {
+            \   'left': [ [ 'mode', 'paste' ],
+            \             [ 'fugitive', 'filename' ] ]
+            \ },
+            \ 'component_function': {
+            \   'fugitive': 'LightLineFugitive',
+            \   'readonly': 'LightLineReadonly',
+            \   'modified': 'LightLineModified',
+            \   'filename': 'LightLineFilename'
+            \ },
+            \ 'separator': { 'left': '', 'right': '' },
+            \ 'subseparator': { 'left': '', 'right': '' }
+            \ }
+
+function! LightLineModified()
+    if &filetype == "help"
+        return ""
+    elseif &modified
+        return "+"
+    elseif &modifiable
+        return ""
+    else
+        return ""
+    endif
+endfunction
+
+function! LightLineReadonly()
+    if &filetype == "help"
+        return ""
+    elseif &readonly
+        return ""
+    else
+        return ""
+    endif
+endfunction
+
+function! LightLineFugitive()
+    if exists("*fugitive#head")
+        let _ = fugitive#head()
+        return strlen(_) ? ' '._ : ''
+    endif
+    return ''
+endfunction
+
+function! LightLineFilename()
+    return ('' != LightLineReadonly() ? LightLineReadonly() . ' ' : '') .
+                \ ('' != expand('%:t') ? expand('%:t') : '[No Name]') .
+                \ ('' != LightLineModified() ? ' ' . LightLineModified() : '')
+endfunction
+" Use spaces for indentation, with width = 4
+set ts=4 
+set sts=4
+set sw=4
+set expandtab
+" Some other indentation settings
+set smartindent
+set noautoindent
+set nocindent
+" Current colorscheme solarized
+colorscheme solarized
+set background=dark
+" Set the 110 column to gray so that lines dont grow too big
+set colorcolumn=81
+highlight ColorColumn ctermbg=darkgray
+" A build system
+" Compile and run C++
+autocmd filetype cpp nnoremap <F4>  :!clang++-3.6 % -Wall -Werror -pthread -pedantic -std=c++14 -I../headers -I$HOME/bin -o '%:r' && './%:r'<CR>
+" Compile and debug C++
+autocmd filetype cpp nnoremap <F7>  :!clang++-3.6 % -Wall -pthread -pedantic -std=c++14  -I../headers -I$HOME/bin -g -o '%:r' && gdb '%:r'<CR>
+" Compile and run C
+autocmd filetype c nnoremap <F4>  :!gcc % -Wall -std=c11 -pthread -pedantic -lm -o '%:r' && './%:r'<CR>
+" Make all targets
+nnoremap <F8> :!make all<CR>
+" Run python
+autocmd filetype python nnoremap <F4> :!python %<CR>
+" Reindent file
+nnoremap <F6>  gg=G''
+" CTRLV splits vertically
+nnoremap <C-v> :vsp<CR>
+" CTRLH splits horizontally
+nnoremap <C-a> :sp<CR>
+set splitbelow
+set splitright
+" Split navigation
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+" Text movement with arrow keys
+nmap <Up> [e
+nmap <Down> ]e
+vmap <Up> [egv
+vmap <Down> ]egv
+nmap <Left> <<
+nmap <Right> >>
+vmap <Left> <gv
+vmap <Right> >gv
+" Display line numbers
+set nu
+" Modify the gutter
+set numberwidth=4
+"highlight LineNr term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE gui=NONE guifg=DarkGrey guibg=NONE
+" Highlight the current line
+set cursorline
+" tab completetion on paths
+set wildmode=full
+" Enable status line
+set laststatus=2
+" Settings for NERDtree
+"autocmd VimEnter * NERDTree
+autocmd VimEnter * wincmd p
+let g:NERDTreeWinPos = "right"
+nnoremap <F9> :NERDTreeToggle<CR>
+"autocmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
+"" Close all open buffers on entering a window if the only
+"" buffer that's left is the NERDTree buffer
+"function! s:CloseIfOnlyNerdTreeLeft()
+"if exists("t:NERDTreeBufName")
+"if bufwinnr(t:NERDTreeBufName) != -1
+"if winnr("$") == 1
+"q
+"endif
+"endif
+"endif
+"endfunction
+"let g:NERDTreeWinSize=24
+" Filetypes for NERDcommenter
+filetype plugin on
+let mapleader=" "
+autocmd BufEnter * silent! lcd %:p:h
+" Syntastic settings
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+" Read the vimrc from current dir
+set exrc
+"
+" YouCompleteMe options
+"
+" A function to check if the configuration file exists in the project
+if filereadable("../cfg/ycm_extra_conf.py")
+    let g:ycm_global_ycm_extra_conf = '../cfg/ycm_extra_conf.py'
+else
+    let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
+endif
+"will put icons in Vim's gutter on lines that have a diagnostic set.
+"Turning this off will also turn off the YcmErrorLine and YcmWarningLine
+"highlighting
+let g:ycm_enable_diagnostic_signs = 1
+let g:ycm_enable_diagnostic_highlighting = 1
+let g:ycm_always_populate_location_list = 1 "default 0
+let g:ycm_open_loclist_on_ycm_diags = 1 "default 1
+
+let g:ycm_always_populate_loc_list = 1
+let g:ycm_auto_loc_list = 1
+let g:ycm_check_on_open = 1
+let g:ycm_check_on_wq = 0
+
+let g:ycm_complete_in_strings = 1 "default 1
+let g:ycm_collect_identifiers_from_tags_files = 0 "default 0
+let g:ycm_path_to_python_interpreter = '' "default ''
+
+
+let g:ycm_server_use_vim_stdout = 0 "default 0 (logging to console)
+let g:ycm_server_log_level = 'info' "default info
+
+let g:ycm_goto_buffer_command = 'same-buffer' "[ 'same-buffer', 'horizontal-split', 'vertical-split', 'new-tab' ]
+let g:ycm_filetype_whitelist = { '*': 1 }
+let g:ycm_key_invoke_completion = '<C-Space>'
+highlight YcmErrorSection guifg=#eeeeee
+set completeopt-=preview
+let g:ycm_add_preview_to_completeopt=0
+" Config for UltiSnips
+" make YCM compatible with UltiSnips (using supertab)
+let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+let g:SuperTabDefaultCompletionType = '<C-n>'
+
+" better key bindings for UltiSnipsExpandTrigger
+let g:UltiSnipsExpandTrigger = "<tab>"
+let g:UltiSnipsJumpForwardTrigger = "<tab>"
+let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+" Remap esc to something else
+ino jk <esc>
+cno jk <c-c>
+vno v <esc>
+" Use shift+arrows to copy above or below
+nmap <S-Down> 0v$"+yojk"+gPddk
+nmap <S-Up> 0v$"+yOjk"+gPddk
+" Window title
+let &titlestring = "Vim"
+if &term == "screen"
+    set t_ts=^[k
+    set t_fs=^[\
+endif
+if &term == "screen" || &term == "xterm"
+    set title
+endif
+" Ctags
+set tags=~/.vim/tags/cpp_tags
+" CtrlP
+set runtimepath^=~/.vim/bundle/ctrlp.vim
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
+nnoremap <leader>. :CtrlPTag<cr>
+" Tagbar
+set runtimepath^=~/.vim/bundle/tagbar
+nnoremap <silent> <Leader>b :TagbarToggle<CR>
+let g:tagbar_width = 30
+let s:width = 80
+" Numpad needed
+set noek
+" Make vim better on the Bash
+if !has("gui_running")
+    set t_Co=16
+endif
+" Escape/unescape & < > HTML entities in range (default current line).
+function! HtmlEntities(line1, line2, action)
+    let search = @/
+    let range = 'silent ' . a:line1 . ',' . a:line2
+    if a:action == 0  " must convert &amp; last
+        execute range . 'sno/&lt;/</eg'
+        execute range . 'sno/&gt;/>/eg'
+        execute range . 'sno/&amp;/&/eg'
+    else              " must convert & first
+        execute range . 'sno/&/&amp;/eg'
+        execute range . 'sno/</&lt;/eg'
+        execute range . 'sno/>/&gt;/eg'
+    endif
+    nohl
+    let @/ = search
+endfunction
+command! -range -nargs=1 Entities call HtmlEntities(<line1>, <line2>, <args>)
+noremap <silent> \h :Entities 0<CR>
+noremap <silent> \H :Entities 1<CR>
+if &term =~ '^screen'
+    " tmux will send xterm-style keys when its xterm-keys option is on
+    execute "set <xUp>=\e[1;*A"
+    execute "set <xDown>=\e[1;*B"
+    execute "set <xRight>=\e[1;*C"
+    execute "set <xLeft>=\e[1;*D"
+endif

@@ -1,2 +1,3 @@
 # dotfiles
-Development environment
+
+Settings and configuration for my development environment.
