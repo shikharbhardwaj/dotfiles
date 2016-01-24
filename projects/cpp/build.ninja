@@ -1,0 +1,7 @@
+cflags = -Wall -Werror -std=c++14 -pthread -pedantic -I ./include
+cc = clang++-3.6
+rule cc
+    command = $cc $cflags $in -o $out
+
+build ./bin/main : cc ./src/main.cpp
+
