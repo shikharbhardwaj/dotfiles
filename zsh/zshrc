@@ -92,3 +92,8 @@ export GEM_HOME=~/.gem
 export GEM_PATH=~/.gem
 # Settings for dircolors
 eval `dircolors ~/.dircolors`
+# Start tmux on login
+if [[ ! $TERM =~ screen ]]; then
+	TERM="screen-256color-bce"
+    exec tmux -u
+fi
