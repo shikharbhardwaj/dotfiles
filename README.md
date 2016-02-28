@@ -1,8 +1,9 @@
 # dotfiles
 
-Settings and configuration for my development environment. These include my 
-`vim` settings and plugins, `zsh` and `tmux` stuff and templates for projects. 
-Will change over time as stuff gets added or removed.
+This repository has settings my development environment, along with some random
+useful scripts. These include my `vim` settings and plugins, `zsh` and `tmux` 
+stuff and templates for projects. Will change over time as stuff gets added or 
+removed.
 
 ## Usage
 

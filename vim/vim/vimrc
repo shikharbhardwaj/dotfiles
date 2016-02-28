@@ -30,10 +30,6 @@ Plugin 'majutsushi/tagbar'
 Plugin 'kchmck/vim-coffee-script'
 " YCM
 Bundle 'Valloric/YouCompleteMe'
-" Indentation for python
-Plugin 'vim-scripts/indentpython.vim'
-" PEP8 checking for python
-Plugin 'nvie/vim-flake8'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -118,10 +114,11 @@ endfunction
 set ts=4 
 set sts=4
 set sw=4
-set textwidth=79
 set expandtab
-set autoindent
-set fileformat=unix
+" Some other indentation settings
+set smartindent
+set noautoindent
+set nocindent
 " Current colorscheme solarized
 colorscheme solarized
 set background=dark
@@ -138,7 +135,7 @@ autocmd filetype c nnoremap <F4>  :!gcc % -Wall -std=c11 -pthread -pedantic -lm 
 " Make all targets
 nnoremap <F8> :!make all<CR>
 " Run python
-autocmd filetype python nnoremap <F4> :!python3 %<CR>
+autocmd filetype python nnoremap <F4> :!python %<CR>
 " Reindent file
 nnoremap <F6>  gg=G''
 " CTRL V splits vertically
@@ -309,37 +306,4 @@ if &term =~ '^screen'
     execute "set <xRight>=\e[1;*C"
     execute "set <xLeft>=\e[1;*D"
 endif
-set clipboard=unnamed
-let python_highlight_all = 1
-" Enable editing encrypted files
-" Transparent editing of gpg encrypted files.
-augroup encrypted
-au!
-" First make sure nothing is written to ~/.viminfo while editing
-" an encrypted file.
-autocmd BufReadPre,FileReadPre      *.gpg set viminfo=
-" We don't want a swap file, as it writes unencrypted data to disk
-autocmd BufReadPre,FileReadPre      *.gpg set noswapfile
-" Switch to binary mode to read the encrypted file
-autocmd BufReadPre,FileReadPre      *.gpg set bin
-autocmd BufReadPre,FileReadPre      *.gpg let ch_save = &ch|set ch=2
-autocmd BufReadPre,FileReadPre      *.gpg let shsave=&sh
-autocmd BufReadPre,FileReadPre      *.gpg let &sh='sh'
-autocmd BufReadPre,FileReadPre      *.gpg let ch_save = &ch|set ch=2
-autocmd BufReadPost,FileReadPost    *.gpg '[,']!gpg --decrypt --default-recipient-self 2> /dev/null
-autocmd BufReadPost,FileReadPost    *.gpg let &sh=shsave
-" Switch to normal mode for editing
-autocmd BufReadPost,FileReadPost    *.gpg set nobin
-autocmd BufReadPost,FileReadPost    *.gpg let &ch = ch_save|unlet ch_save
-autocmd BufReadPost,FileReadPost    *.gpg execute ":doautocmd BufReadPost " . expand("%:r")
-" Convert all text to encrypted text before writing
-autocmd BufWritePre,FileWritePre    *.gpg set bin
-autocmd BufWritePre,FileWritePre    *.gpg let shsave=&sh
-autocmd BufWritePre,FileWritePre    *.gpg let &sh='sh'
-autocmd BufWritePre,FileWritePre    *.gpg '[,']!gpg --encrypt --default-recipient-self 2>/dev/null
-autocmd BufWritePre,FileWritePre    *.gpg let &sh=shsave
-" Undo the encryption so we are back in the normal text, directly
-" after the file has been written.
-autocmd BufWritePost,FileWritePost  *.gpg silent u
-autocmd BufWritePost,FileWritePost  *.gpg set nobin
-augroup END
+
