@@ -19,5 +19,8 @@ echo "Press ctrl + c to abort"
 # Wait for user to see this message
 sleep 3
 tmux new "~/.vim/bundle/YouCompleteMe/install.py --clang-completer"
+if [ -d "~/custom/scripts" ]; then
+    cp ./scripts/* ~/custom/scripts
+fi
 echo "Done"
 
