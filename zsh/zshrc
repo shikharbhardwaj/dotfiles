@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-  export ZSH=/home/bluefog/.oh-my-zsh
+export ZSH=/home/bluefog/.oh-my-zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -62,11 +62,7 @@ source $ZSH/oh-my-zsh.sh
 # export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
+export EDITOR='vim'
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -85,15 +81,25 @@ source $ZSH/oh-my-zsh.sh
 # 
 # A custom prompt
 export HOST="work"
-alias tmux="TERM=screen-256color-bce tmux -u"
+alias tmux="TERM=xterm-256color tmux -2 -u"
+alias ":q"="exit"
+alias "contest"="tmuxinator citius"
 # Settings for Ruby
 export PATH=$PATH:$HOME/.rvm/bin
+export PATH=$PATH:$HOME/.gem/bin
 export GEM_HOME=~/.gem
 export GEM_PATH=~/.gem
 # Settings for dircolors
 eval `dircolors ~/.dircolors`
-# Start tmux on login
+# Base16 Shell
+BASE16_SHELL="$HOME/.config/base16-shell/base16-default.dark.sh"
+SOLARIZED="$HOME/custom/scripts/solarized.sh"
+COLOR_SCHEME="$SOLARIZED"
+[[ -s $COLOR_SCHEME ]] && source $COLOR_SCHEME
+# For tmuxinator
+[[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
+# Don't start tmux on login
 if [[ ! $TERM =~ screen ]]; then
-	TERM="screen-256color-bce"
+	TERM="xterm-256color"
     exec tmux -u
 fi

@@ -3,11 +3,9 @@
 "
 set nocompatible              " be iMproved, required
 filetype off                  " required
-
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 " Git in vim
@@ -26,38 +24,27 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'ervandew/supertab'
 " Tagbar
 Plugin 'majutsushi/tagbar'
-" Coffeescript support
-Plugin 'kchmck/vim-coffee-script'
 " YCM
 Bundle 'Valloric/YouCompleteMe'
 " Indentation for python
 Plugin 'vim-scripts/indentpython.vim'
 " PEP8 checking for python
-Plugin 'nvie/vim-flake8'
+Plugin 'chriskempson/base16-vim'
+" Manage Lightline using vundle
+Plugin 'itchyny/lightline.vim'
+" Enhanced C++ highlighting
+Plugin 'octol/vim-cpp-enhanced-highlight'
+" Seamless navigation within splits and panes
+Bundle 'christoomey/vim-tmux-navigator'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
-"
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-"
-" see :h vundle for more details or wiki for FAQ
-" Put your non-Plugin stuff after this line
-
 " Vundle config end
-"
-"
 " Vim configuration file
 " No toolbar/scrollbars and other crap
 set guioptions=aem
-set nowrap
 set esckeys
-set scrolloff=2
+set scrolloff=5
 " Font (required for lightline)
 if has('gui_running')
     set guifont=Source\ Code\ Pro\ for\ Powerline\ Medium\ 10
@@ -114,21 +101,42 @@ function! LightLineFilename()
                 \ ('' != expand('%:t') ? expand('%:t') : '[No Name]') .
                 \ ('' != LightLineModified() ? ' ' . LightLineModified() : '')
 endfunction
-" Use spaces for indentation, with width = 4
-set ts=4 
+
+set autoread " File change detection
+" make backspace behave in a sane manner
+set backspace=indent,eol,start
+" Indentation settings
+" Tab width = 4
+
+set ts=4
 set sts=4
 set sw=4
-set textwidth=79
+set textwidth=80
 set expandtab
+" Line number settings
+" Use only relative line numbers in the gutter
+" Absolute line numbers are present in the status line
+set rnu
+" Modify the gutter
+set numberwidth=4
+" Highlight the current line
+set cursorline
+" Fast redraw
+set ttyfast
+" Use autoindent and smartindent
 set autoindent
+set smartindent
+" Use UNIX style line endings
 set fileformat=unix
-" Current colorscheme solarized
+" Colorscheme settings
 colorscheme solarized
+" We use a 256 color terminal
+let base16colorspace=256
 set background=dark
 " Set the 81 column to gray so that lines dont grow too big
 set colorcolumn=81
 highlight ColorColumn ctermbg=darkgray
-" A build system
+" Build system
 " Compile and run C++
 autocmd filetype cpp nnoremap <F4>  :!clang++-3.6 % -Wall -Werror -pthread -pedantic -std=c++14 -I../headers -I$HOME/bin -o '%:r' && './%:r'<CR>
 " Compile and debug C++
@@ -137,9 +145,9 @@ autocmd filetype cpp nnoremap <F7>  :!clang++-3.6 % -Wall -pthread -pedantic -st
 autocmd filetype c nnoremap <F4>  :!gcc % -Wall -std=c11 -pthread -pedantic -lm -o '%:r' && './%:r'<CR>
 " Make all targets
 nnoremap <F8> :!make all<CR>
-" Run python
+" Run python3
 autocmd filetype python nnoremap <F4> :!python3 %<CR>
-" Reindent file
+" Reindent file and return to same line(kind of an anti pattern)
 nnoremap <F6>  gg=G''
 " CTRL V splits vertically
 nnoremap <C-v> :vsp<CR>
@@ -161,51 +169,43 @@ nmap <Left> <<
 nmap <Right> >>
 vmap <Left> <gv
 vmap <Right> >gv
-" Display line numbers
-set nu
-" Modify the gutter
-set numberwidth=4
-" Highlight the current line
-set cursorline
 " tab completetion on paths
 set wildmode=full
 " Enable status line
 set laststatus=2
+" Code folding settings
+set foldmethod=syntax " fold based on indent
+set foldnestmax=10 " deepest fold is 10 levels
+set nofoldenable " don't fold by default
+set foldlevel=1
+" Wrap settings
+set wrap "turn on line wrapping
+set wrapmargin=8 " wrap lines when coming within n characters from side
+set linebreak " set soft wrapping
+set showbreak=… " show ellipsis at breaking
 " Settings for NERDtree
 " Uncomment below to start off with NERDTree open
-"autocmd VimEnter * NERDTree 
+" autocmd VimEnter * NERDTree
 autocmd VimEnter * wincmd p
 let g:NERDTreeWinPos = "right"
 nnoremap <F9> :NERDTreeToggle<CR>
-"autocmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
-" Close all open buffers on entering a window if the only
-" buffer that's left is the NERDTree buffer
-"function! s:CloseIfOnlyNerdTreeLeft()
-"if exists("t:NERDTreeBufName")
-"if bufwinnr(t:NERDTreeBufName) != -1
-"if winnr("$") == 1
-"q
-"endif
-"endif
-"endif
-"endfunction
-" let g:NERDTreeWinSize=24
+let g:NERDTreeWinSize=24
 " Filetypes for NERDcommenter
 filetype plugin on
-" Let space be the leader key
-let mapleader=" "
+" Let , be the leader key
+let mapleader=","
 autocmd BufEnter * silent! lcd %:p:h
 " Syntastic settings
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
-
 " Read the vimrc from current dir
 set exrc
 "
 " YouCompleteMe options
 "
-" A function to check if the configuration file exists in the project
+" Check if the configuration file exists in the project
+" for custom configs for each project
 if filereadable("../cfg/ycm_extra_conf.py")
     let g:ycm_global_ycm_extra_conf = '../cfg/ycm_extra_conf.py'
 else
@@ -217,20 +217,20 @@ endif
 let g:ycm_enable_diagnostic_signs = 1
 let g:ycm_enable_diagnostic_highlighting = 1
 let g:ycm_always_populate_location_list = 1 "default 0
-let g:ycm_open_loclist_on_ycm_diags = 1 "default 1
+" let g:ycm_open_loclist_on_ycm_diags = 1 "default 1
 
 let g:ycm_always_populate_loc_list = 1
 let g:ycm_auto_loc_list = 1
 let g:ycm_check_on_open = 1
 let g:ycm_check_on_wq = 0
 
-let g:ycm_complete_in_strings = 1 "default 1
+" let g:ycm_complete_in_strings = 1 "default 1
 let g:ycm_collect_identifiers_from_tags_files = 0 "default 0
-let g:ycm_path_to_python_interpreter = '' "default ''
+" let g:ycm_path_to_python_interpreter = '' "default ''
 
 
-let g:ycm_server_use_vim_stdout = 0 "default 0 (logging to console)
-let g:ycm_server_log_level = 'info' "default info
+" let g:ycm_server_use_vim_stdout = 0 "default 0 (logging to console)
+" let g:ycm_server_log_level = 'info' "default info
 
 let g:ycm_goto_buffer_command = 'same-buffer' "[ 'same-buffer', 'horizontal-split', 'vertical-split', 'new-tab' ]
 let g:ycm_filetype_whitelist = { '*': 1 }
@@ -261,7 +261,7 @@ if &term == "screen"
     set t_ts=^[k
     set t_fs=^[\
 endif
-if &term == "screen" || &term == "xterm"
+if &term == "screen"
     set title
 endif
 " Ctags
@@ -278,10 +278,8 @@ let g:tagbar_width = 30
 let s:width = 80
 " Numpad needed
 set noek
-" Make vim better on the Bash
-if !has("gui_running")
-    set t_Co=16
-endif
+" We use a 256 color terminal
+set t_Co=256
 " Escape/unescape & < > HTML entities in range (default current line).
 function! HtmlEntities(line1, line2, action)
     let search = @/
@@ -343,3 +341,14 @@ autocmd BufWritePre,FileWritePre    *.gpg let &sh=shsave
 autocmd BufWritePost,FileWritePost  *.gpg silent u
 autocmd BufWritePost,FileWritePost  *.gpg set nobin
 augroup END
+" Show invisibles
+" Shortcut to rapidly toggle `set list`
+nmap <leader>l :set list!<CR>
+" Use the same symbols as TextMate for tabstops and EOLs
+set listchars=tab:▸\ ,eol:¬
+function! BeforeWrite()
+    let a:cursor_pos = getpos(".")
+    execute "%!clang-format-3.6 -style='{BasedOnStyle: llvm, IndentWidth: 4}'"
+    call setpos('.', a:cursor_pos)
+endfunction
+autocmd FileType c,cpp autocmd BufWritePre <buffer> :call BeforeWrite()
