@@ -48,7 +48,7 @@ flags = [
 '-I',
 '../include',
 './include',
-'.',
+'./',
 '/usr/include/c++/4.8.4',
 '-isystem',
 '/home/shikhar/Documents/dev/breakout/src/include',

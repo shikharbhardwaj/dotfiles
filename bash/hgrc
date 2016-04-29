@@ -1,0 +1,22 @@
+[ui]
+username = Shikhar Bhardwaj <shikhar@bluefog.me>
+merge = internal:merge
+ 
+[diff]
+git = 1
+showfunc = 1
+unified = 8
+
+[defaults]
+commit = -v
+qnew  = -Ue
+
+[extensions]
+color =
+rebase =
+histedit =
+progress =
+transplant =
+pager =
+mq = 
+purge =
