@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 import dbus
+import sys
 def split_till(candidates, max_length):
     result = ''
     for candidate in candidates:
@@ -9,8 +10,11 @@ def split_till(candidates, max_length):
         if len(result) >= max_length:
             return result
 session_bus = dbus.SessionBus()
-spotify_bus = session_bus.get_object("org.mpris.MediaPlayer2.spotify",
-                                     "/org/mpris/MediaPlayer2")
+try:
+    spotify_bus = session_bus.get_object("org.mpris.MediaPlayer2.spotify",
+                                         "/org/mpris/MediaPlayer2")
+except:
+    sys.exit()
 spotify_properties = dbus.Interface(spotify_bus,
                                     "org.freedesktop.DBus.Properties")
 metadata = spotify_properties.Get("org.mpris.MediaPlayer2.Player", "Metadata")
@@ -23,6 +27,14 @@ MAX_NAME_LENGTH = 20
 MAX_ALBUM_LENGTH = 10
 name = split_till(name_candidates, MAX_NAME_LENGTH)
 album = split_till(album_candidates, MAX_ALBUM_LENGTH)
-print_str = '♫ ♪ ' + name + '| ' + album
+print_str = '♫ ♪ ' 
+if name is not None:
+    print_str += name
+    if album is not None:
+        print_str += '| ' + album
+elif album is not None:
+    print_str += album
+
+
 print_str.encode('utf-8')
 print(print_str)
