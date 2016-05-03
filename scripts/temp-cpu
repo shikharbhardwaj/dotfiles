@@ -1,0 +1,5 @@
+#!/bin/sh
+DEV_PATH="/sys/class/hwmon/hwmon3/temp1_input"
+TEMP_C=$(cat "$DEV_PATH")
+FACT_CONST=1000
+echo "$TEMP_C/$FACT_CONST" | bc -l | cut -c1-5

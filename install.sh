@@ -11,5 +11,6 @@ echo "Vim"
 cp -ar ./fonts ~/.fonts
 cp -ar ./vim ~/.vim
 cp -ar ./scripts/ ~/custom/scripts
+cp -ar ./scripts ~/bin
 echo "Done"
 

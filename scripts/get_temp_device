@@ -1,0 +1,20 @@
+#!/usr/bin/python2
+import os
+import re
+hwmon_root = "/sys/class/hwmon/"
+available_dev = os.listdir(hwmon_root)
+for path in available_dev:
+    abs_path = hwmon_root + path + "/name"
+    if os.path.exists(abs_path):
+        file_h = open(abs_path)
+        if file_h.read() == 'k10temp\n':
+            req_path = hwmon_root + path + "/temp1_input"
+            file = open("/home/bluefog/bin/temp-cpu")
+            filedata = file.read()
+            file.close()
+            mod = re.sub("DEV_PATH=.*", "DEV_PATH=\""+req_path+"\"", filedata)
+            file_h = open("/home/bluefog/bin/temp-cpu", "w")
+            file_h.write(mod)
+            file_h.close()
+            
+
