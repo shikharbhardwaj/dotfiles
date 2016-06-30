@@ -1,0 +1,12 @@
+#!/bin/bash
+echo "Updating config"
+echo "tmux"
+cp -v ~/.tmux.conf ./tmux/tmux.conf 
+echo "zsh"
+cp -v ~/.zshrc ./zsh/zshrc 
+cp -v ~/.oh-my-zsh/themes ./zsh/*.theme 
+echo "bash"
+cp -v ~/.bashrc ./bash/bashrc 
+echo "Scripts"
+cp ~/custom/scripts/* ./scripts
+echo "Config update complete."

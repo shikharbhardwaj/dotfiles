@@ -10,14 +10,18 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 " Git in vim
 Plugin 'tpope/vim-fugitive'
+" Some sensible defaults
+Plugin 'tpope/vim-sensible'
 " The sparkup vim script is in a subdirectory of this repo called vim.
 " Pass the path to set the runtimepath properly.
 Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 " UltiSnips
 " Track the engine.
-Plugin 'SirVer/ultisnips'
+"Plugin 'SirVer/ultisnips'
 " Code snippets for UltiSnips
-Plugin 'honza/vim-snippets'
+"Plugin 'honza/vim-snippets'
+" clang-format
+Plugin 'rhysd/vim-clang-format'
 " ctrlp
 Plugin 'kien/ctrlp.vim'
 " SuperTab
@@ -42,22 +46,24 @@ filetype plugin indent on    " required
 " Vundle config end
 " Vim configuration file
 " No toolbar/scrollbars and other crap
+" Matchparen makes vim slower
+let loaded_matchparen = 1 
 set guioptions=aem
-set esckeys
 set scrolloff=5
 " Font (required for lightline)
 if has('gui_running')
     set guifont=Source\ Code\ Pro\ for\ Powerline\ Medium\ 10
 endif
 " Settings for lightline
+" In component_function
+"\   'fugitive': 'LightLineFugitive',
 let g:lightline = {
             \ 'colorscheme': 'powerline',
             \ 'active': {
             \   'left': [ [ 'mode', 'paste' ],
-            \             [ 'fugitive', 'filename' ] ]
+            \             [ 'filename' ] ]
             \ },
             \ 'component_function': {
-            \   'fugitive': 'LightLineFugitive',
             \   'readonly': 'LightLineReadonly',
             \   'modified': 'LightLineModified',
             \   'filename': 'LightLineFilename'
@@ -116,7 +122,10 @@ set expandtab
 " Line number settings
 " Use only relative line numbers in the gutter
 " Absolute line numbers are present in the status line
-set rnu
+set nu
+set nocursorcolumn
+set norelativenumber
+syntax sync minlines=256
 " Modify the gutter
 set numberwidth=4
 " Highlight the current line
@@ -125,7 +134,6 @@ set cursorline
 set ttyfast
 " Use autoindent and smartindent
 set autoindent
-set smartindent
 " Use UNIX style line endings
 set fileformat=unix
 " Colorscheme settings
@@ -138,20 +146,17 @@ set colorcolumn=81
 highlight ColorColumn ctermbg=darkgray
 " Build system
 " Compile and run C++
-autocmd filetype cpp nnoremap <F4>  :!clang++-3.6 % -Wall -Werror -pthread -pedantic -std=c++14 -I../headers -I$HOME/bin -o '%:r' && './%:r'<CR>
+autocmd filetype cpp nnoremap <F4>  :!g++ % -Wall -Werror -pthread -pedantic -std=c++14 -I../headers -I$HOME/bin -o '%:r' && './%:r'<CR>
 " Compile and debug C++
-autocmd filetype cpp nnoremap <F7>  :!clang++-3.6 % -Wall -pthread -pedantic -std=c++14  -I../headers -I$HOME/bin -g -o '%:r' && gdb '%:r'<CR>
+autocmd filetype cpp nnoremap <F7>  :!g++ % -Wall -pthread -pedantic -std=c++14  -I../headers -I$HOME/bin -g -o '%:r' && gdb '%:r'<CR>
 " Compile and run C
 autocmd filetype c nnoremap <F4>  :!gcc % -Wall -std=c11 -pthread -pedantic -lm -o '%:r' && './%:r'<CR>
 " Make all targets
 nnoremap <F8> :!make all<CR>
 " Run python3
 autocmd filetype python nnoremap <F4> :!python3 %<CR>
-" Reindent file and return to same line(kind of an anti pattern)
-nnoremap <F6>  gg=G''
-" CTRL V splits vertically
+" Split shortcuts
 nnoremap <C-v> :vsp<CR>
-" CTRL A splits horizontally
 nnoremap <C-a> :sp<CR>
 set splitbelow
 set splitright
@@ -184,12 +189,12 @@ set wrapmargin=8 " wrap lines when coming within n characters from side
 set linebreak " set soft wrapping
 set showbreak=… " show ellipsis at breaking
 " Settings for NERDtree
-" Uncomment below to start off with NERDTree open
-" autocmd VimEnter * NERDTree
-autocmd VimEnter * wincmd p
-let g:NERDTreeWinPos = "right"
+" Comment below to start off without NERDTree open
+"autocmd VimEnter * NERDTree
+"autocmd VimEnter * wincmd p
+let g:NERDTreeWinPos = "left"
 nnoremap <F9> :NERDTreeToggle<CR>
-let g:NERDTreeWinSize=24
+let g:NERDTreeWinSize=32
 " Filetypes for NERDcommenter
 filetype plugin on
 " Let , be the leader key
@@ -211,43 +216,8 @@ if filereadable("../cfg/ycm_extra_conf.py")
 else
     let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
 endif
-"will put icons in Vim's gutter on lines that have a diagnostic set.
-"Turning this off will also turn off the YcmErrorLine and YcmWarningLine
-"highlighting
-let g:ycm_enable_diagnostic_signs = 1
-let g:ycm_enable_diagnostic_highlighting = 1
-let g:ycm_always_populate_location_list = 1 "default 0
-" let g:ycm_open_loclist_on_ycm_diags = 1 "default 1
-
-let g:ycm_always_populate_loc_list = 1
-let g:ycm_auto_loc_list = 1
-let g:ycm_check_on_open = 1
-let g:ycm_check_on_wq = 0
-
-" let g:ycm_complete_in_strings = 1 "default 1
-let g:ycm_collect_identifiers_from_tags_files = 0 "default 0
-" let g:ycm_path_to_python_interpreter = '' "default ''
-
-
-" let g:ycm_server_use_vim_stdout = 0 "default 0 (logging to console)
-" let g:ycm_server_log_level = 'info' "default info
-
-let g:ycm_goto_buffer_command = 'same-buffer' "[ 'same-buffer', 'horizontal-split', 'vertical-split', 'new-tab' ]
-let g:ycm_filetype_whitelist = { '*': 1 }
-let g:ycm_key_invoke_completion = '<C-Space>'
-highlight YcmErrorSection guifg=#eeeeee
+" Do not show preview split
 set completeopt-=preview
-let g:ycm_add_preview_to_completeopt=0
-" Config for UltiSnips
-" make YCM compatible with UltiSnips (using supertab)
-let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
-let g:SuperTabDefaultCompletionType = '<C-n>'
-
-" better key bindings for UltiSnipsExpandTrigger
-let g:UltiSnipsExpandTrigger = "<tab>"
-let g:UltiSnipsJumpForwardTrigger = "<tab>"
-let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 " Remap esc to something else
 ino jk <esc>
 cno jk <c-c>
@@ -265,7 +235,7 @@ if &term == "screen"
     set title
 endif
 " Ctags
-set tags=~/.vim/tags/cpp_tags
+set tags=tags;
 " CtrlP
 set runtimepath^=~/.vim/bundle/ctrlp.vim
 let g:ctrlp_map = '<c-p>'
@@ -276,8 +246,6 @@ set runtimepath^=~/.vim/bundle/tagbar
 nnoremap <silent> <Leader>b :TagbarToggle<CR>
 let g:tagbar_width = 30
 let s:width = 80
-" Numpad needed
-set noek
 " We use a 256 color terminal
 set t_Co=256
 " Escape/unescape & < > HTML entities in range (default current line).
@@ -346,9 +314,33 @@ augroup END
 nmap <leader>l :set list!<CR>
 " Use the same symbols as TextMate for tabstops and EOLs
 set listchars=tab:▸\ ,eol:¬
-function! BeforeWrite()
-    let a:cursor_pos = getpos(".")
-    execute "%!clang-format-3.6 -style='{BasedOnStyle: llvm, IndentWidth: 4}'"
-    call setpos('.', a:cursor_pos)
+" Tag navigation
+function TagJumpForward()
+    execute "tag " . expand("<cword>")
+    try | foldopen! | catch | | endtry
 endfunction
-autocmd FileType c,cpp autocmd BufWritePre <buffer> :call BeforeWrite()
+
+function TagJumpBack()
+    try | foldclose! | catch | | endtry
+    pop
+endfunction
+
+nnoremap <silent> <C-i> :call TagJumpForward()<CR>
+nnoremap <silent> <C-t> :call TagJumpBack()<CR>
+" Tag support in CtrlP
+let g:ctrlp_extensions = ['tag']
+"function! BeforeWrite()
+    "let a:cursor_pos = getpos(".")
+    "execute '%!clang-format-3.8 -style='{BasedOnStyle: llvm, IndentWidth: 4}''
+    "call setpos('.', a:cursor_pos)
+"endfunction
+"autocmd FileType c,cpp autocmd BufWritePre <buffer> :call BeforeWrite()
+let g:clang_format#style_options = {
+    \"BasedOnStyle" : "llvm",
+    \"IndentWidth" : 4}
+let g:clang_format#auto_format = 1
+let g:clang_format#command = "clang-format-3.8"
+
+" Faster quit and write
+command Q :qa
+command W :wa

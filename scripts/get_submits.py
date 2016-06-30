@@ -36,7 +36,7 @@ def get_max_pages(problem_code, contest_code, verbose=False):
         raw = urllib.request.urlopen(site_root +
                             "/ssubmission/prob?page=" + "1" + 
                                             "&pcode=" + problem_code +
-                                            "&ccode=" + contest_code).readall()
+                                            "&ccode=" + contest_code).read()
     except urllib.error.HTTPError as e:
         #We retry forever in case of 503
         print_error("HTTPError encountered with status code " + str(e.code))
@@ -60,7 +60,7 @@ def get_submits(problem_code, contest_code, page_no="1"):
         raw = urllib.request.urlopen(site_root +
                             "/ssubmission/prob?page=" + page_no + 
                                             "&pcode=" + problem_code +
-                                            "&ccode=" + contest_code).readall()
+                                            "&ccode=" + contest_code).read()
     except urllib.error.HTTPError as e:
         #We retry forever in case of 503
         print_error("HTTPError encountered with status code " + str(e.code))
@@ -73,7 +73,8 @@ def get_submits(problem_code, contest_code, page_no="1"):
     print_info("Connection successful")
     raw = raw.decode('utf-8')
     submission_html = json.loads(raw)["content"]
-    submit_list = BeautifulSoup(submission_html).findAll("tr", {"class":"kol"})
+    submit_list = BeautifulSoup(submission_html, "html.parser").findAll("tr")
+    submit_list.pop(0)
     final_data = []
     for sub in submit_list:
         sub_dict = {}
@@ -82,7 +83,7 @@ def get_submits(problem_code, contest_code, page_no="1"):
              print_error("""Check problem_code, contest_code or your internet connection""")
              break
         sub_dict["user"]        = sub_tag[0].text
-        sub_dict["time"]        = sub_tag[1].text
+        sub_dict["score/time"]  = sub_tag[1].text
         sub_dict["mem"]         = sub_tag[2].text
         sub_dict["lang"]        = sub_tag[3].text
         sub_dict["solution"]    = site_root + sub_tag[4].findAll("a")[0]["href"]
