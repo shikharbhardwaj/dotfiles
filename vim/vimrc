@@ -38,6 +38,7 @@ Plugin 'chriskempson/base16-vim'
 Plugin 'itchyny/lightline.vim'
 " Enhanced C++ highlighting
 Plugin 'octol/vim-cpp-enhanced-highlight'
+" Python indent
 " Seamless navigation within splits and panes
 Bundle 'christoomey/vim-tmux-navigator'
 " All of your Plugins must be added before the following line
@@ -217,7 +218,7 @@ else
     let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
 endif
 " Do not show preview split
-set completeopt-=preview
+"set completeopt-=preview
 " Remap esc to something else
 ino jk <esc>
 cno jk <c-c>

@@ -1,0 +1,8 @@
+-O3
+-std=c++14
+-fno-exceptions
+-fno-rtti
+-Wall
+-pedantic
+-Werror
+-pthread
