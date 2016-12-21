@@ -1,63 +1,73 @@
-"
-" Vundle config begin 
-"
 set nocompatible              " be iMproved, required
 filetype off                  " required
+
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
+
 call vundle#begin()
-" let Vundle manage Vundle, required
+
 Plugin 'VundleVim/Vundle.vim'
-" Git in vim
 Plugin 'tpope/vim-fugitive'
-" Some sensible defaults
 Plugin 'tpope/vim-sensible'
-" The sparkup vim script is in a subdirectory of this repo called vim.
-" Pass the path to set the runtimepath properly.
-Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
-" UltiSnips
-" Track the engine.
-"Plugin 'SirVer/ultisnips'
-" Code snippets for UltiSnips
-"Plugin 'honza/vim-snippets'
-" clang-format
+Plugin 'tpope/vim-surround'
+Plugin 'jiangmiao/auto-pairs'
+Plugin 'SirVer/ultisnips'
 Plugin 'rhysd/vim-clang-format'
-" ctrlp
 Plugin 'kien/ctrlp.vim'
-" SuperTab
 Plugin 'ervandew/supertab'
-" Tagbar
 Plugin 'majutsushi/tagbar'
-" YCM
-Bundle 'Valloric/YouCompleteMe'
-" Indentation for python
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'scrooloose/nerdtree'
+Plugin 'Valloric/YouCompleteMe'
 Plugin 'vim-scripts/indentpython.vim'
-" PEP8 checking for python
 Plugin 'chriskempson/base16-vim'
-" Manage Lightline using vundle
+Plugin 'altercation/vim-colors-solarized'
 Plugin 'itchyny/lightline.vim'
-" Enhanced C++ highlighting
 Plugin 'octol/vim-cpp-enhanced-highlight'
-" Python indent
-" Seamless navigation within splits and panes
 Bundle 'christoomey/vim-tmux-navigator'
-" All of your Plugins must be added before the following line
+
 call vundle#end()            " required
 filetype plugin indent on    " required
-" Vundle config end
-" Vim configuration file
-" No toolbar/scrollbars and other crap
-" Matchparen makes vim slower
-let loaded_matchparen = 1 
+" Enable line numbering
+set nu
+" Remove clutter from the GUI
 set guioptions=aem
-set scrolloff=5
 " Font (required for lightline)
 if has('gui_running')
     set guifont=Source\ Code\ Pro\ for\ Powerline\ Medium\ 10
 endif
-" Settings for lightline
-" In component_function
-"\   'fugitive': 'LightLineFugitive',
+" Map Esc to something reachable
+ino jk <esc>
+cno jk <c-c>
+vno v <esc>
+" Use shift+arrows to copy above or below
+nmap <S-Down> 0v$"+yojk"+gPddk
+nmap <S-Up> 0v$"+yOjk"+gPddk
+" Select the colorscheme
+colorscheme base16-default-dark
+" We use a 256 color terminal
+let base16colorspace=256
+set background=dark
+set cursorline
+" Global indentation settings
+set expandtab
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
+" Special settings for HTML files
+autocmd FileType html setlocal shiftwidth=2 tabstop=2
+
+set autoread " File change detection
+set t_Co=256
+set textwidth=80
+" Mark the maximum width allowed
+set colorcolumn=81
+highlight colorcolumn ctermbg=darkgrey
+" Line padding while scrolling
+set scrolloff=5
+" Clipboard setting
+set clipboard=unnamed
+" Lightline settings(no git for a reason)
 let g:lightline = {
             \ 'colorscheme': 'powerline',
             \ 'active': {
@@ -72,7 +82,6 @@ let g:lightline = {
             \ 'separator': { 'left': '', 'right': '' },
             \ 'subseparator': { 'left': '', 'right': '' }
             \ }
-
 function! LightLineModified()
     if &filetype == "help"
         return ""
@@ -84,7 +93,6 @@ function! LightLineModified()
         return ""
     endif
 endfunction
-
 function! LightLineReadonly()
     if &filetype == "help"
         return ""
@@ -94,68 +102,11 @@ function! LightLineReadonly()
         return ""
     endif
 endfunction
-
-function! LightLineFugitive()
-    if exists("*fugitive#head")
-        let _ = fugitive#head()
-        return strlen(_) ? ' '._ : ''
-    endif
-    return ''
-endfunction
-
 function! LightLineFilename()
     return ('' != LightLineReadonly() ? LightLineReadonly() . ' ' : '') .
                 \ ('' != expand('%:t') ? expand('%:t') : '[No Name]') .
                 \ ('' != LightLineModified() ? ' ' . LightLineModified() : '')
 endfunction
-
-set autoread " File change detection
-" make backspace behave in a sane manner
-set backspace=indent,eol,start
-" Indentation settings
-" Tab width = 4
-
-set ts=4
-set sts=4
-set sw=4
-set textwidth=80
-set expandtab
-" Line number settings
-" Use only relative line numbers in the gutter
-" Absolute line numbers are present in the status line
-set nu
-set nocursorcolumn
-set norelativenumber
-syntax sync minlines=256
-" Modify the gutter
-set numberwidth=4
-" Highlight the current line
-set cursorline
-" Fast redraw
-set ttyfast
-" Use autoindent and smartindent
-set autoindent
-" Use UNIX style line endings
-set fileformat=unix
-" Colorscheme settings
-colorscheme solarized
-" We use a 256 color terminal
-let base16colorspace=256
-set background=dark
-" Set the 81 column to gray so that lines dont grow too big
-set colorcolumn=81
-highlight ColorColumn ctermbg=darkgray
-" Build system
-" Compile and run C++
-autocmd filetype cpp nnoremap <F4>  :!g++ % -Wall -Werror -pthread -pedantic -std=c++14 -I../headers -I$HOME/bin -o '%:r' && './%:r'<CR>
-" Compile and debug C++
-autocmd filetype cpp nnoremap <F7>  :!g++ % -Wall -pthread -pedantic -std=c++14  -I../headers -I$HOME/bin -g -o '%:r' && gdb '%:r'<CR>
-" Compile and run C
-autocmd filetype c nnoremap <F4>  :!gcc % -Wall -std=c11 -pthread -pedantic -lm -o '%:r' && './%:r'<CR>
-" Make all targets
-nnoremap <F8> :!make all<CR>
-" Run python3
-autocmd filetype python nnoremap <F4> :!python3 %<CR>
 " Split shortcuts
 nnoremap <C-v> :vsp<CR>
 nnoremap <C-a> :sp<CR>
@@ -189,24 +140,11 @@ set wrap "turn on line wrapping
 set wrapmargin=8 " wrap lines when coming within n characters from side
 set linebreak " set soft wrapping
 set showbreak=… " show ellipsis at breaking
-" Settings for NERDtree
-" Comment below to start off without NERDTree open
-"autocmd VimEnter * NERDTree
-"autocmd VimEnter * wincmd p
+" Map leader to ,
+let mapleader=","
+" Settings for NERDTree
 let g:NERDTreeWinPos = "left"
 nnoremap <F9> :NERDTreeToggle<CR>
-let g:NERDTreeWinSize=32
-" Filetypes for NERDcommenter
-filetype plugin on
-" Let , be the leader key
-let mapleader=","
-autocmd BufEnter * silent! lcd %:p:h
-" Syntastic settings
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-" Read the vimrc from current dir
-set exrc
 "
 " YouCompleteMe options
 "
@@ -215,17 +153,8 @@ set exrc
 if filereadable("../cfg/ycm_extra_conf.py")
     let g:ycm_global_ycm_extra_conf = '../cfg/ycm_extra_conf.py'
 else
-    let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
+    let g:ycm_global_ycm_extra_conf = '~/.vim/ycm_extra_conf.py'
 endif
-" Do not show preview split
-"set completeopt-=preview
-" Remap esc to something else
-ino jk <esc>
-cno jk <c-c>
-vno v <esc>
-" Use shift+arrows to copy above or below
-nmap <S-Down> 0v$"+yojk"+gPddk
-nmap <S-Up> 0v$"+yOjk"+gPddk
 " Window title
 let &titlestring = "Vim"
 if &term == "screen"
@@ -247,8 +176,6 @@ set runtimepath^=~/.vim/bundle/tagbar
 nnoremap <silent> <Leader>b :TagbarToggle<CR>
 let g:tagbar_width = 30
 let s:width = 80
-" We use a 256 color terminal
-set t_Co=256
 " Escape/unescape & < > HTML entities in range (default current line).
 function! HtmlEntities(line1, line2, action)
     let search = @/
@@ -276,8 +203,7 @@ if &term =~ '^screen'
     execute "set <xRight>=\e[1;*C"
     execute "set <xLeft>=\e[1;*D"
 endif
-set clipboard=unnamed
-let python_highlight_all = 1
+
 " Enable editing encrypted files
 " Transparent editing of gpg encrypted files.
 augroup encrypted
@@ -330,18 +256,9 @@ nnoremap <silent> <C-i> :call TagJumpForward()<CR>
 nnoremap <silent> <C-t> :call TagJumpBack()<CR>
 " Tag support in CtrlP
 let g:ctrlp_extensions = ['tag']
-"function! BeforeWrite()
-    "let a:cursor_pos = getpos(".")
-    "execute '%!clang-format-3.8 -style='{BasedOnStyle: llvm, IndentWidth: 4}''
-    "call setpos('.', a:cursor_pos)
-"endfunction
-"autocmd FileType c,cpp autocmd BufWritePre <buffer> :call BeforeWrite()
+" Settings for clang-format
 let g:clang_format#style_options = {
     \"BasedOnStyle" : "llvm",
     \"IndentWidth" : 4}
 let g:clang_format#auto_format = 1
 let g:clang_format#command = "clang-format-3.8"
-
-" Faster quit and write
-command Q :qa
-command W :wa

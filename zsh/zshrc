@@ -1,10 +1,12 @@
-# Path to your oh-my-zsh installation.
-export ZSH=/home/bluefog/.oh-my-zsh
+# If you come from bash you might have to change your $PATH.
+# export PATH=$HOME/bin:/usr/local/bin:$PATH
 
-# Set name of the theme to load.
-# Look in ~/.oh-my-zsh/themes/
-# Optionally, if you set this to "random", it'll load a random theme each
-# time that oh-my-zsh is loaded.
+# Path to your oh-my-zsh installation.
+  export ZSH=/home/shikhar/.oh-my-zsh
+
+# Set name of the theme to load. Optionally, if you set this to "random"
+# it'll load a random theme each time that oh-my-zsh is loaded.
+# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 ZSH_THEME="robbyrussell_mod"
 
 # Uncomment the following line to use case-sensitive completion.
@@ -49,26 +51,29 @@ ZSH_THEME="robbyrussell_mod"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-syntax-highlighting last-working-dir)
+plugins=(git zsh-syntax-highlighting)
+
+source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-  export PATH="$PATH:/usr/lib/ccache:/home/bluefog/bin:/usr/lib/ccache:/home/bluefog/bin:/home/bluefog/.rvm/gems/ruby-2.2.1/bin:/home/bluefog/.rvm/gems/ruby-2.2.1@global/bin:/home/bluefog/.rvm/rubies/ruby-2.2.1/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/home/bluefog/.rvm/bin:/home/bluefog/.rvm/bin:/home/bluefog/.rvm/bin:/home/bluefog/.rvm/bin:/home/bluefog/.rvm/bin"
 # export MANPATH="/usr/local/man:$MANPATH"
-
-source $ZSH/oh-my-zsh.sh
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
-export EDITOR='vim'
+# if [[ -n $SSH_CONNECTION ]]; then
+#   export EDITOR='vim'
+# else
+#   export EDITOR='mvim'
+# fi
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
 # ssh
-# export SSH_KEY_PATH="~/.ssh/dsa_id"
+# export SSH_KEY_PATH="~/.ssh/rsa_id"
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
@@ -78,28 +83,23 @@ export EDITOR='vim'
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-# 
-# A custom prompt
 alias tmux="TERM=xterm-256color tmux -2 -u"
 alias ":q"="exit"
-# Settings for Ruby
-export PATH=$PATH:$HOME/.rvm/bin
-export PATH=$PATH:$HOME/.gem/bin
-export GEM_PATH=~/.gem
-# Make settings
+alias ":e"="vim"
+
+#Settings for makefiles
 export MAKEFILES=$HOME/custom/makefile
-# Settings for dircolors
+#Settings for dicolors
 eval `dircolors ~/.dircolors`
-# Base16 Shell
-BASE16_SHELL="$HOME/.config/base16-shell/base16-default.dark.sh"
-SOLARIZED="$HOME/custom/scripts/solarized.sh"
-COLOR_SCHEME="$SOLARIZED"
-[[ -s $COLOR_SCHEME ]] && source $COLOR_SCHEME
-# For tmuxinator
-[[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
-# Don't start tmux on login
+
+#Colorschemes
+BASE16_SHELL="$HOME/custom/colorschemes/base16-default-dark.sh"
+SOLARIZED="$HOME/custom/colorschemes/solarized.sh"
+CURRENT_SCHEME="$BASE16_SHELL"
+
+[[ -s $CURRENT_SCHEME ]] && source $CURRENT_SCHEME
+
 if [[ ! $TERM =~ screen ]]; then
-	TERM="xterm-256color"
+        TERM="xterm-256color"
     exec tmux -u
 fi
-zstyle -e ':completion:*:default' list-colors 'reply=("${PREFIX:+=(#bi)($PREFIX:t)(?)*==02=01}:${(s.:.)LS_COLORS}")'
