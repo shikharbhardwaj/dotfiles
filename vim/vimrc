@@ -10,6 +10,7 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-sensible'
 Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-repeat'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'SirVer/ultisnips'
 Plugin 'rhysd/vim-clang-format'
@@ -24,6 +25,8 @@ Plugin 'chriskempson/base16-vim'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'itchyny/lightline.vim'
 Plugin 'octol/vim-cpp-enhanced-highlight'
+Plugin 'LucHermitte/local_vimrc'
+Plugin 'LucHermitte/lh-vim-lib'
 Bundle 'christoomey/vim-tmux-navigator'
 
 call vundle#end()            " required
@@ -40,11 +43,8 @@ endif
 ino jk <esc>
 cno jk <c-c>
 vno v <esc>
-" Use shift+arrows to copy above or below
-nmap <S-Down> 0v$"+yojk"+gPddk
-nmap <S-Up> 0v$"+yOjk"+gPddk
 " Select the colorscheme
-colorscheme base16-default-dark
+colorscheme solarized
 " We use a 256 color terminal
 let base16colorspace=256
 set background=dark
@@ -117,15 +117,6 @@ nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
-" Text movement with arrow keys
-nmap <Up> [e
-nmap <Down> ]e
-vmap <Up> [egv
-vmap <Down> ]egv
-nmap <Left> <<
-nmap <Right> >>
-vmap <Left> <gv
-vmap <Right> >gv
 " tab completetion on paths
 set wildmode=full
 " Enable status line
@@ -262,3 +253,26 @@ let g:clang_format#style_options = {
     \"IndentWidth" : 4}
 let g:clang_format#auto_format = 1
 let g:clang_format#command = "clang-format-3.8"
+" Change to current file directory 
+autocmd BufEnter * silent! :lcd%:p:h
+" Make with F4
+autocmd filetype cpp nnoremap <F4> :!make % && './%:r'<CR>
+autocmd filetype c nnoremap <F4> :!make % && './%:r'<CR>
+" Python support with virtualenv
+let g:ycm_python_binary_path = 'python'
+map <C-Y> :call yapf#YAPF()<cr>
+imap <C-Y> <c-o>:call yapf#YAPF()<cr>
+" Use shift+arrows to copy above or below
+nmap <S-Down> Yp
+nmap <S-Up> Ykp
+" Text movement with arrow keys
+nnoremap <Up> :m -2<CR>
+nnoremap <Down> :m +1<CR>
+" Visual mode
+vnoremap <Down> :m '>+1<CR>gv=gv
+vnoremap <Up> :m '<-2<CR>gv=gv
+nmap <Left> <<
+nmap <Right> >>
+vmap <Left> <gv
+vmap <Right> >gv
+
