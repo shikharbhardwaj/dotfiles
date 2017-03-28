@@ -13,6 +13,7 @@ Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-repeat'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
 Plugin 'rhysd/vim-clang-format'
 Plugin 'kien/ctrlp.vim'
 Plugin 'ervandew/supertab'
@@ -25,8 +26,8 @@ Plugin 'chriskempson/base16-vim'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'itchyny/lightline.vim'
 Plugin 'octol/vim-cpp-enhanced-highlight'
-Plugin 'LucHermitte/local_vimrc'
 Plugin 'LucHermitte/lh-vim-lib'
+Plugin 'wavded/vim-stylus'
 Bundle 'christoomey/vim-tmux-navigator'
 
 call vundle#end()            " required
@@ -47,13 +48,16 @@ vno v <esc>
 colorscheme solarized
 " We use a 256 color terminal
 let base16colorspace=256
-set background=dark
+set background=light
 set cursorline
 " Global indentation settings
 set expandtab
-set tabstop=4
-set shiftwidth=4
-set softtabstop=4
+set tabstop=2
+set shiftwidth=2
+set softtabstop=2
+"set tabstop=4
+"set shiftwidth=4
+"set softtabstop=4
 " Special settings for HTML files
 autocmd FileType html setlocal shiftwidth=2 tabstop=2
 
@@ -62,14 +66,14 @@ set t_Co=256
 set textwidth=80
 " Mark the maximum width allowed
 set colorcolumn=81
-highlight colorcolumn ctermbg=darkgrey
+"highlight colorcolumn ctermbg=darkgrey
 " Line padding while scrolling
 set scrolloff=5
 " Clipboard setting
 set clipboard=unnamed
 " Lightline settings(no git for a reason)
 let g:lightline = {
-            \ 'colorscheme': 'powerline',
+            \ 'colorscheme': 'solarized',
             \ 'active': {
             \   'left': [ [ 'mode', 'paste' ],
             \             [ 'filename' ] ]
@@ -251,13 +255,13 @@ let g:ctrlp_extensions = ['tag']
 let g:clang_format#style_options = {
     \"BasedOnStyle" : "llvm",
     \"IndentWidth" : 4}
-let g:clang_format#auto_format = 1
+"let g:clang_format#auto_format = 1
 let g:clang_format#command = "clang-format-3.8"
 " Change to current file directory 
 autocmd BufEnter * silent! :lcd%:p:h
 " Make with F4
-autocmd filetype cpp nnoremap <F4> :!make % && './%:r'<CR>
-autocmd filetype c nnoremap <F4> :!make % && './%:r'<CR>
+autocmd filetype cpp nnoremap <F4> :!make %:r && './%:r'<CR>
+autocmd filetype c nnoremap <F4> :!make %:r && './%:r'<CR>
 " Python support with virtualenv
 let g:ycm_python_binary_path = 'python'
 map <C-Y> :call yapf#YAPF()<cr>
@@ -275,4 +279,7 @@ nmap <Left> <<
 nmap <Right> >>
 vmap <Left> <gv
 vmap <Right> >gv
+
+let g:UltiSnipsExpandTrigger = "<C-l>"
+let g:UltiSnipsSnippetDirectories = ['~/.vim/bundle/vim-snippets/UltiSnips', 'UltiSnips']
 

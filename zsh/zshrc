@@ -51,7 +51,7 @@ ZSH_THEME="robbyrussell_mod"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-syntax-highlighting)
+plugins=(git zsh-syntax-highlighting last-working-dir)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -95,7 +95,7 @@ eval `dircolors ~/.dircolors`
 #Colorschemes
 BASE16_SHELL="$HOME/custom/colorschemes/base16-default-dark.sh"
 SOLARIZED="$HOME/custom/colorschemes/solarized.sh"
-CURRENT_SCHEME="$BASE16_SHELL"
+CURRENT_SCHEME="$SOLARIZED"
 
 [[ -s $CURRENT_SCHEME ]] && source $CURRENT_SCHEME
 
@@ -103,3 +103,10 @@ if [[ ! $TERM =~ screen ]]; then
         TERM="xterm-256color"
     exec tmux -u
 fi
+export LD_LIBRARY_PATH="$HOME/custom/libs"
+export LIBRARY_PATH="$HOME/custom/libs"
+export CPATH="$HOME/custom/include"
+
+# Add custom path to run my executables
+export PATH="/home/shikhar/custom/bin:$PATH"
+

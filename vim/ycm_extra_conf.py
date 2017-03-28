@@ -16,7 +16,10 @@ BASE_FLAGS = [
     '-std=c++11',
     '-xc++',
     '-I/usr/lib/',
-    '-I/usr/include/'
+    '-I/usr/include/',
+    '-I/home/shikhar/custom/include/',
+    '-I/home/shikhar/Documents/dev/mlpack-fork/src',
+    '-I/usr/lib/gcc/x86_64-linux-gnu/5/include'
 ]
 
 SOURCE_EXTENSIONS = [
