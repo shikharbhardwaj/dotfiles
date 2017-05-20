@@ -1,0 +1,6 @@
+Name: mlpack
+Description: scalable C++ machine learning library
+URL: http://www.mlpack.org/
+Version: 2.0.x
+Cflags:  -I/usr/local/include/
+Libs: -lrt -larmadillo -lboost_program_options -lboost_unit_test_framework -lboost_serialization -L/usr/local/lib/ -lmlpack
