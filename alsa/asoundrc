@@ -1,0 +1,37 @@
+pcm.!default {
+    type hw
+    card Generic
+}
+
+ctl.!default {
+    type hw
+    card Generic
+}
+
+pcm.realtek {
+    type hw
+    card Generic
+}
+
+pcm.dmixer {
+    type dmix
+    ipc_key 2048
+    slave {
+        pcm realtek
+        buffer_size 16384
+    }
+}
+
+ctl.equal {
+    type equal;
+}
+
+pcm.equalizer {
+    type equal
+    slave.pcm "plug:dmixer"
+}
+
+pcm.!default {
+    type plug
+    slave.pcm equalizer
+}
