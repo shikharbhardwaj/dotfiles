@@ -1,0 +1,4 @@
+#!/bin/bash
+
+a=$(cat /sys/class/hwmon/hwmon3/temp1_input)
+echo $(bc <<< 'scale=2; '$a' / 1000')'°C'
