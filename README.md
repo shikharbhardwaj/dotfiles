@@ -4,9 +4,7 @@ My development environment.
 # My setup
  * Use the latest Ubuntu Server LTS version.
  * Install nvidia drivers (latest version)
- * Install xinit
- * Install i3, dmenu, feh
- * Install lxterminal, alsa-utils, libasound2-plugin-equal
- * Install git, google-chrome, git
- * Adjust sound
+ * `sudo apt-get install xinit i3 dmenu feh vim-gtk lxterminal alsa-utils libasound2-plugin-equal git zsh build-essential python-dev python3-dev cmake`
+ * Adjust sound playback.
+ * Execute `install.sh` to set most things up.
  * Set wallpaper, vim everything!
