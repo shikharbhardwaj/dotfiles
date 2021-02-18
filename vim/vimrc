@@ -198,8 +198,8 @@ augroup END
 " Show invisibles
 " Shortcut to rapidly toggle `set list`
 nmap <leader>l :set list!<CR>
-" Use the same symbols as TextMate for tabstops and EOLs
-set listchars=tab:▸\ ,eol:¬
+" Symbols for showing whitespace
+set listchars=tab:\|\ ,trail:.,extends:>,precedes:<
 " Tag navigation
 function TagJumpForward()
     execute "tag " . expand("<cword>")
