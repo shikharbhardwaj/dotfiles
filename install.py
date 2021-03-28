@@ -30,14 +30,14 @@ def Main():
     print("Vim : \t\t" + ( check_mark if check_program_exists("vim") 
                           else cross_mark ))
     print("Installing config")
-    if not p.exists(p.join(HOME_DIR, ".vim"))
+    if not p.exists(p.join(HOME_DIR, ".vim")):
         os.makedirs(p.join(HOME_DIR, ".vim"))
+
     copyfile(p.join(DIR_OF_THIS_SCRIPT, "vim", "vimrc"), 
-             p.join(HOME_DIR, ".vim"))
+             p.join(HOME_DIR, ".vim/vimrc"))
     copyfile(p.join(DIR_OF_THIS_SCRIPT, "tmux", "tmux.conf"), 
              p.join(HOME_DIR, ".tmux.conf"))
     copyfile(p.join(DIR_OF_THIS_SCRIPT, "zsh", "zshrc"), 
             p.join(HOME_DIR, ".zshrc"))
-    copyfile(p.join(DIR_OF_THIS_SCRIPT, "zsh"))
 
 Main()
