@@ -1,2 +1,5 @@
 # Ignore installed vim plugins
 vim/bundle
+
+*.swp
+*.swo
