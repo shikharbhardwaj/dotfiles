@@ -1,0 +1,7 @@
+[submodule "dotbot"]
+	path = dotbot
+	url = https://github.com/anishathalye/dotbot
+	ignore = dirty
+[submodule "vim/vundle"]
+	path = vim/vundle
+	url = https://github.com/VundleVim/Vundle.vim
