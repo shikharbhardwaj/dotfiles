@@ -57,3 +57,5 @@ eval `dircolors ~/.dircolors`
 
 export TERM="xterm-256color"
 
+export PATH="$HOME/custom/bin:$PATH"
+
