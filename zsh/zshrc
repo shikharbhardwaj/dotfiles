@@ -83,3 +83,5 @@ export MAKEFILES=$HOME/custom/Makefile
 eval "$(nodenv init -)"
 
 source "$HOME/custom/scripts/devstat.bash"
+
+source "$HOME/custom/scripts/extra.bash"
