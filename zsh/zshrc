@@ -19,6 +19,9 @@ ZSH_THEME="robbyrussell_mod"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git zsh-syntax-highlighting)
 
+# ZSH plugins config
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#0058b3,bg=darkblue,bold,underline"
+
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
