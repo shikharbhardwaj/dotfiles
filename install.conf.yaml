@@ -17,6 +17,7 @@
 - shell:
   - [sudo apt-get install -y zsh python3 build-essential tmux vim-gtk]
   - [git submodule update --init --recursive, Installing submodules]
+  - ["[[ -d ~/.vim/bundle/Vundle.vim ]] || git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim", Install vundle]
   - [vim +PluginInstall +qall, Installing vim plugins]
   - [sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh) '' --keep-zshrc", Installing oh-my-zsh]
   - [wget -O ~/.dircolors "https://raw.githubusercontent.com/seebi/dircolors-solarized/master/dircolors.ansi-dark"]
