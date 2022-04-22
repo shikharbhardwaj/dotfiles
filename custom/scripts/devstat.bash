@@ -35,7 +35,7 @@ function createcp() {
 
         echo "Creating and pushing CP for commit ID $commit_id from base branch $base_branch to branch $cp_branch"
 
-        git checkout -b $base_branch
+        git checkout $base_branch
         git pull
         git checkout -b $cp_branch
         git cherry-pick $commit_id
