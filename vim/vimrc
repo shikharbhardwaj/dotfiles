@@ -109,7 +109,7 @@ function! LightLineFilename()
 endfunction
 " Split shortcuts
 "nnoremap <C-v> :vsp<CR>
-nnoremap <C-a> :sp<CR>
+"nnoremap <C-a> :sp<CR>
 set splitbelow
 set splitright
 " Split navigation with ctrl

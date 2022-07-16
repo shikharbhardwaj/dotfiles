@@ -59,3 +59,24 @@ export TERM="xterm-256color"
 
 export PATH="$HOME/custom/bin:$PATH"
 
+eval "$(pyenv init -)"
+export PATH="$HOME/.nodenv/bin:$PATH"
+
+export PATH="$HOME/go/bin:$PATH"
+
+export PATH="/usr/local/go/bin:$PATH"
+export GOPATH="$HOME/Documents/workspace/go"
+export PATH="$GOPATH/bin:$PATH"
+export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/local/lib/pkgconfig
+
+export CPATH="$HOME/custom/include"
+
+#
+# Load nodenv automatically by appending
+# the following to ~/.zshrc:
+#
+eval "$(nodenv init -)"
+
+export DEVSTAT_HOME_DIR="$HOME/Workspace"
+
+source "$HOME/custom/scripts/devstat.bash"
