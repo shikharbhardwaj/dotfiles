@@ -41,42 +41,7 @@ source $ZSH/oh-my-zsh.sh
 # ssh
 # export SSH_KEY_PATH="~/.ssh/rsa_id"
 
-alias tmux="TERM=xterm-256color tmux -2 -u"
-alias ":q"="exit"
-alias ":e"="vim"
-
-# Colorscheme config
-BASE16_SHELL="$HOME/custom/colorschemes/base16-default-dark.sh"
-SOLARIZED="$HOME/custom/colorschemes/solarized.sh"
-CURRENT_SCHEME="$SOLARIZED"
-
-# Settings for dicolors
-eval `dircolors ~/.dircolors`
-
-[[ -s $CURRENT_SCHEME ]] && source $CURRENT_SCHEME
-
-export TERM="xterm-256color"
-
-export PATH="$HOME/custom/bin:$PATH"
-
-eval "$(pyenv init -)"
-export PATH="$HOME/.nodenv/bin:$PATH"
-
-export PATH="$HOME/go/bin:$PATH"
-
-export PATH="/usr/local/go/bin:$PATH"
-export GOPATH="$HOME/Documents/workspace/go"
-export PATH="$GOPATH/bin:$PATH"
-export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/local/lib/pkgconfig
-
-export CPATH="$HOME/custom/include"
-
-#
-# Load nodenv automatically by appending
-# the following to ~/.zshrc:
-#
-eval "$(nodenv init -)"
-
 export DEVSTAT_HOME_DIR="$HOME/Workspace"
 
 source "$HOME/custom/scripts/devstat.bash"
+source "$HOME/custom/scripts/extra.bash"
