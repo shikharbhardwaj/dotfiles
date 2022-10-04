@@ -1920,7 +1920,7 @@ function printTable()
             local table=''
             local i=1
 
-            for ((i = 1; i <= "${numberOfLines}"; i = i + 1))
+            for i in {1..${numberOfLines}}
             do
                 local line=''
                 line="$(sed "${i}q;d" <<< "${tableData}")"
@@ -1941,7 +1941,7 @@ function printTable()
 
                 local j=1
 
-                for ((j = 1; j <= "${numberOfColumns}"; j = j + 1))
+                for j in {1..${numberOfColumns}}
                 do
                     table="${table}$(printf '#|  %s' "$(cut -d "${delimiter}" -f "${j}" <<< "${line}")")"
                 done

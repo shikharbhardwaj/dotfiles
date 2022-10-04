@@ -6,7 +6,7 @@
 source $HOME/custom/scripts/utils.bash
 
 # declare -a repos=("instabase" "instabase_fork_001" "instabase_fork_002")
-repos=("instabase" "instabase_fork_001" "instabase_fork_002")
+repos=("instabase_clone_000" "instabase_clone_001" "instabase_clone_002" "instabase_clone_003")
 
 function printStatus()
 {
