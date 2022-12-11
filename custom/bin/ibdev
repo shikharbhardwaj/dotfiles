@@ -1,3 +1,5 @@
 #!/bin/zsh
 
+source $HOME/custom/scripts/devstat.bash
+
 devstat stat

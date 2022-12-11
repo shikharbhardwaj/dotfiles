@@ -15,7 +15,7 @@
     ~/custom: custom
 
 - shell:
-  - [sudo apt-get install -y zsh python3 build-essential tmux vim-gtk]
+# - [sudo apt-get install -y zsh python3 build-essential tmux vim-gtk]
   - [git submodule update --init --recursive, Installing submodules]
   - [vim +PluginInstall +qall, Installing vim plugins]
   - [sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)", Installing oh-my-zsh]
