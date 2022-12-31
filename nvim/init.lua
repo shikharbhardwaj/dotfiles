@@ -1,2 +1,1 @@
 require("bluefog")
-print("Hello")
