@@ -16,9 +16,8 @@
     ~/custom: custom
 
 - shell:
-  - [sudo apt-get install -y zsh python3 build-essential tmux vim-gtk nvim]
   - [git submodule update --init --recursive, Installing submodules]
-  - [vim +PluginInstall +qall, Installing vim plugins]
+  - [(echo "" | vim +PluginInstall +qall) || 0, Installing vim plugins]
   - [sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)", Installing oh-my-zsh]
   - [wget -O ~/.dircolors "https://raw.githubusercontent.com/seebi/dircolors-solarized/master/dircolors.ansi-dark"]
   - [cp zsh/themes/* ~/.oh-my-zsh/themes, Installing custom oh-my-zsh themes]
