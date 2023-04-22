@@ -3,7 +3,7 @@
 	url = https://github.com/anishathalye/dotbot
 	ignore = dirty
 [submodule "vim/vundle"]
-	path = vim/vundle
+	path = vim/bundle/vundle
 	url = https://github.com/VundleVim/Vundle.vim
 [submodule "zsh/plugins/zsh-syntax-highlighting"]
 	path = zsh/plugins/zsh-syntax-highlighting

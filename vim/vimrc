@@ -25,6 +25,7 @@ Plugin 'octol/vim-cpp-enhanced-highlight'
 Plugin 'LucHermitte/lh-vim-lib'
 Plugin 'ctrlpvim/ctrlp.vim'
 Bundle 'christoomey/vim-tmux-navigator'
+Plugin 'pedrohdz/vim-yaml-folds'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -249,3 +250,8 @@ if executable(s:clip)
         autocmd TextYankPost * if v:event.operator ==# 'y' | call system(s:clip, @0) | endif
     augroup END
 endif
+
+" YAML editing
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+autocmd FileType yml setlocal ts=2 sts=2 sw=2 expandtab
+let g:indentLine_char = '⦙'
