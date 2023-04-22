@@ -1,0 +1,27 @@
+{
+    "workbench.colorTheme": "Default Dark+",
+    "editor.accessibilitySupport": "off",
+    "vim.insertModeKeyBindingsNonRecursive": [
+        {
+            "before": ["j", "k"],
+            "after": ["<esc>"]
+        }
+    ],
+    "vim.handleKeys": {
+        "<C-d>": true,
+        "<C-s>": false,
+        "<C-z>": false,
+        "<C-q>": false,
+    },
+    "window.zoomLevel": -1,
+    "files.autoSave": "afterDelay",
+    "git.confirmSync": false,
+    "remote.SSH.remotePlatform": {"oci-learn-vm":"linux","144.24.115.84":"linux","phoenix":"linux","coder-vscode--shikhar--algorithm-dev":"linux"},
+    "workbench.editor.untitled.hint": "hidden",
+    "[python]": {
+        "editor.formatOnType": true
+    },
+    "terminal.integrated.fontFamily": "'Source Code Pro for Powerline'",
+    "terminal.integrated.letterSpacing": 1,
+    "terminal.integrated.drawBoldTextInBrightColors": false
+}
