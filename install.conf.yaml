@@ -19,6 +19,7 @@
   - [git submodule update --init --recursive, Installing submodules]
   - [(echo "" | vim +PluginInstall +qall) || 0, Installing vim plugins]
   - [sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)", Installing oh-my-zsh]
+  - [rm ~/.zshrc && ln -s $HOME/dotfiles/zsh/zshrc ~/.zshrc, Repair zsh link]
   - [wget -O ~/.dircolors "https://raw.githubusercontent.com/seebi/dircolors-solarized/master/dircolors.ansi-dark"]
   - [cp zsh/themes/* ~/.oh-my-zsh/themes, Installing custom oh-my-zsh themes]
   - [cp -av zsh/plugins/* ~/.oh-my-zsh/plugins, Installing custom oh-my-zsh plugins]
