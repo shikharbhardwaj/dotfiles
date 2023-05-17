@@ -74,6 +74,27 @@ variable "workspace_image" {
   default     = "bluefog/desk:0.3"
 }
 
+variable "postgres_image" {
+  description = "Postgres image"
+  default = "postgres"
+}
+
+variable "postgres_user" {
+  description = "Postgres database"
+  default = "postgres"
+}
+
+variable "postgres_password" {
+  description = "Postgres password"
+  default = "password"
+}
+
+variable "postgres_db" {
+  description = "Postgres database"
+  default = "postgres"
+}
+
+
 provider "kubernetes" {
   # Authenticate via ~/.kube/config or a Coder-specific ServiceAccount, depending on admin preferences
   config_path = var.use_kubeconfig == true ? "~/.kube/config" : null
@@ -197,12 +218,32 @@ resource "kubernetes_pod" "main" {
         read_only  = false
       }
     }
-
-    volume {
-      name = "home"
-      persistent_volume_claim {
-        claim_name = kubernetes_persistent_volume_claim.home.metadata.0.name
-        read_only  = false
+    container {
+      name              = "postgres"
+      image             = "${var.postgres_image}"
+      image_pull_policy = "Always"
+      command           = ["-N", "1000"]
+      security_context {
+        run_as_user = "1000"
+      }
+      ports {}
+      env {
+        name  = "POSTGRES_USER"
+        value = "${var.postgres_user}"
+      }
+      env {
+        name  = "POSTGRES_PASSWORD"
+        value = "${var.postgres_password}"
+      }
+      env {
+        name  = "POSTGRES_DB"
+        value = "${var.postgres_db}"
+      }
+      resources {
+        requests = {
+          "cpu"    = "250m"
+          "memory" = "512Mi"
+        }
       }
     }
 
