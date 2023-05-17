@@ -226,7 +226,6 @@ resource "kubernetes_pod" "main" {
       security_context {
         run_as_user = "1000"
       }
-      ports {}
       env {
         name  = "POSTGRES_USER"
         value = "${var.postgres_user}"
