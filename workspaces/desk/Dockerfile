@@ -7,7 +7,7 @@ USER root
 RUN apt-get update && apt-get install -y build-essential libssl-dev zlib1g-dev \
     libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev \
     libncursesw5-dev xz-utils libffi-dev liblzma-dev python-openssl gdb tree \
-    redis-server zsh vim-tiny
+    redis-server zsh vim-tiny lld clang pkg-config libssl-dev postgresql-client
 
 
 RUN chsh -s $(which zsh) coder
@@ -27,9 +27,6 @@ WORKDIR /home/coder/downloads
 # Setup go toolchain.
 RUN wget https://go.dev/dl/go1.20.3.linux-amd64.tar.gz && sudo tar -C /usr/local/ -xzf go1.20.3.linux-amd64.tar.gz
 RUN echo 'export PATH=$PATH:/usr/local/go/bin' >> /home/coder/.bashrc
-
-# Setup rust toolchain.
-RUN curl https://sh.rustup.rs -sSf | sh -s -- "-y"
 
 WORKDIR /home/coder
 

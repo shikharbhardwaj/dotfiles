@@ -71,7 +71,7 @@ variable "home_disk_size" {
 
 variable "workspace_image" {
   description = "Workspace image"
-  default     = "bluefog/desk:0.1"
+  default     = "bluefog/desk:0.3"
 }
 
 provider "kubernetes" {
@@ -183,8 +183,8 @@ resource "kubernetes_pod" "main" {
       }
       resources {
         requests = {
-          "cpu"    = "250m"
-          "memory" = "512Mi"
+          "cpu"    = "${var.cpu / 2}"
+          "memory" = "${var.memory / 2}Gi"
         }
         limits = {
           "cpu"    = "${var.cpu}"
