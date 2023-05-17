@@ -71,7 +71,7 @@ variable "home_disk_size" {
 
 variable "workspace_image" {
   description = "Workspace image"
-  default     = "bluefog/desk:0.3"
+  default     = "bluefog/desk:0.4"
 }
 
 variable "postgres_image" {
@@ -222,9 +222,9 @@ resource "kubernetes_pod" "main" {
       name              = "postgres"
       image             = "${var.postgres_image}"
       image_pull_policy = "Always"
-      command           = ["-N", "1000"]
+      args              = ["-N", "1000"]
       security_context {
-        run_as_user = "1000"
+        run_as_user = "999"
       }
       env {
         name  = "POSTGRES_USER"

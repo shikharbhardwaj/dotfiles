@@ -1,4 +1,4 @@
-VERSION:=0.2
+VERSION:=0.4
 
 build-docker:
 	docker build -t desk:latest ../../ -f ./Dockerfile
