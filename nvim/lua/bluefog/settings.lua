@@ -38,5 +38,25 @@ vim.opt.updatetime = 50
 
 vim.g.mapleader = ","
 
-vim.opt.clipboard = "unnamedplus"
--- vim.cmd(":highlight SignColumn guibg=lightblue ctermbg=lightblue")
+vim.cmd("set clipboard+=unnamedplus")
+
+vim.opt.cursorline = true
+
+if vim.fn.has('wsl') then
+    vim.cmd([[
+            let g:clipboard = {
+                \   'name': 'WslClipboard',
+                \   'copy': {
+                \      '+': 'clip.exe',
+                \      '*': 'clip.exe',
+                \    },
+                \   'paste': {
+                \      '+': 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+                \      '*': 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+                \   },
+                \   'cache_enabled': 0,
+                \ }
+    ]])
+end
+
+

@@ -1,6 +1,7 @@
 require('rose-pine').setup({
     highlight_groups = {
         LineNr = { bg = 'overlay' },
+        CursorLine = { bg = 'overlay' },
     }
 })
 
