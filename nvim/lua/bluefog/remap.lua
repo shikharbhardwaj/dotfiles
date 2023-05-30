@@ -1,5 +1,3 @@
-vim.keymap.set("n", "<leader>pv", function() vim.cmd(":Ex") end)
-
 -- Rebind Esc to a reachable place.
 vim.keymap.set("i", "jk", "<Esc>")
 vim.keymap.set("c", "jk", "<Esc>")

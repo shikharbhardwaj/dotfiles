@@ -61,10 +61,10 @@ return require('packer').startup(function(use)
 
     -- nvim-surround
     use({
-        "kylechui/nvim-surround",
+        'kylechui/nvim-surround',
         tag = "*", -- Use for stability; omit to use `main` branch for the latest features
         config = function()
-            require("nvim-surround").setup({
+            require('nvim-surround').setup({
                 -- Configuration here, or leave empty to use defaults
             })
         end
@@ -73,11 +73,27 @@ return require('packer').startup(function(use)
 
     -- lazygit
     use({
-        "kdheepak/lazygit.nvim",
+        'kdheepak/lazygit.nvim',
         -- optional for floating window border decoration
         requires = {
-            "nvim-lua/plenary.nvim",
+            'nvim-lua/plenary.nvim',
         },
     })
+
+    -- Gitsigns (gutter indication of diff)
+    use {
+      'lewis6991/gitsigns.nvim',
+    }
+
+
+    use {
+      'nvim-tree/nvim-tree.lua',
+      requires = {
+          'nvim-tree/nvim-web-devicons'
+      },
+      config = function ()
+        require('gitsigns').setup()
+      end
+    }
 end)
 
