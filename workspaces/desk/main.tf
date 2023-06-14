@@ -94,6 +94,10 @@ variable "postgres_db" {
   default = "postgres"
 }
 
+variable "redis_image" {
+  description = "Redis image"
+  default = "redis:7"
+}
 
 provider "kubernetes" {
   # Authenticate via ~/.kube/config or a Coder-specific ServiceAccount, depending on admin preferences
@@ -240,8 +244,22 @@ resource "kubernetes_pod" "main" {
       }
       resources {
         requests = {
-          "cpu"    = "250m"
-          "memory" = "512Mi"
+          "cpu"    = "100m"
+          "memory" = "256Mi"
+        }
+      }
+    }
+    container {
+      name              = "redis"
+      image             = "${var.redis_image}"
+      image_pull_policy = "Always"
+      security_context {
+        run_as_user = "1000"
+      }
+      resources {
+        requests = {
+          "cpu"    = "50m"
+          "memory" = "100Mi"
         }
       }
     }
