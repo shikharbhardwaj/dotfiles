@@ -1,6 +1,8 @@
 # Ignore installed vim plugins
 vim/bundle
-custom/bin
+
+# Ignore extra zshrc config
+custom/scripts/extra.bash
 
 *.swp
 *.swo
