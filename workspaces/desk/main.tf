@@ -71,7 +71,7 @@ variable "home_disk_size" {
 
 variable "workspace_image" {
   description = "Workspace image"
-  default     = "bluefog/desk:0.4"
+  default     = "bluefog/desk:latest"
 }
 
 variable "postgres_image" {
