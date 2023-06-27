@@ -6,6 +6,7 @@
 
 - create:
     - ~/downloads
+    - ~/.config
 
 - link:
     ~/.tmux.conf: tmux/tmux.conf
@@ -15,7 +16,6 @@
     ~/custom: custom
 
 - shell:
-  - [sudo apt-get install -y zsh python3 build-essential tmux vim-gtk]
   - [git submodule update --init --recursive, Installing submodules]
   - ["[[ -d ~/.vim/bundle/Vundle.vim ]] || git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim", Install vundle]
   - ['[[ -d ~/.oh-my-zsh ]] || sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --keep-zshrc', Installing oh-my-zsh]
@@ -23,3 +23,4 @@
   - [cp zsh/themes/* ~/.oh-my-zsh/themes, Installing custom oh-my-zsh themes]
   - [cp -av zsh/plugins/* ~/.oh-my-zsh/plugins, Installing custom oh-my-zsh plugins]
   - [mkdir -p ~/.tmux/plugins && cp -av tmux/plugins/* ~/.tmux/plugins, Installing tmux plugins]
+  - [./install-scripts/install-packer.sh, Installing neovim plugin manager (packer)]
