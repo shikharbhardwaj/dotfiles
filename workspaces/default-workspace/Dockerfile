@@ -11,9 +11,12 @@ RUN apt-get update && apt-get install -y build-essential libssl-dev zlib1g-dev \
 
 RUN chsh -s $(which zsh) coder
 
-# Install pipx and ansible
-RUN pipx ensurepath
-RUN pipx install --include-deps ansible
+# Set the locale
+RUN sed -i '/en_US.UTF-8/s/^# //g' /etc/locale.gen && \
+    locale-gen
+ENV LANG en_US.UTF-8  
+ENV LANGUAGE en_US:en  
+ENV LC_ALL en_US.UTF-8     
 
 WORKDIR /home/coder
 
@@ -24,6 +27,10 @@ WORKDIR /home/coder/dotfiles
 
 USER coder
 RUN ./install
+
+# Install pipx and ansible
+RUN pipx ensurepath
+RUN pipx install --include-deps ansible
 
 WORKDIR /home/coder/downloads
 
