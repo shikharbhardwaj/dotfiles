@@ -24,3 +24,4 @@
   - [cp -av zsh/plugins/* ~/.oh-my-zsh/plugins, Installing custom oh-my-zsh plugins]
   - [mkdir -p ~/.tmux/plugins && cp -av tmux/plugins/* ~/.tmux/plugins, Installing tmux plugins]
   - [./install-scripts/install-packer.sh, Installing neovim plugin manager (packer)]
+  - [./install-scripts/install-k8s-tools.sh, Installing k8s tools]
