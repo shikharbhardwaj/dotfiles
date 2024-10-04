@@ -35,7 +35,7 @@ RUN pipx install --include-deps ansible
 WORKDIR /home/coder/downloads
 
 # Setup go toolchain.
-RUN wget https://go.dev/dl/go1.20.3.linux-amd64.tar.gz && sudo tar -C /usr/local/ -xzf go1.20.3.linux-amd64.tar.gz
+RUN wget https://go.dev/dl/go1.23.2.linux-amd64.tar.gz && sudo tar -C /usr/local/ -xzf go1.23.2.linux-amd64.tar.gz
 RUN echo 'export PATH=$PATH:/usr/local/go/bin' >> /home/coder/.bashrc
 
 WORKDIR /home/coder
