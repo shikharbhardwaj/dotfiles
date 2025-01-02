@@ -19,6 +19,7 @@
   - [git submodule update --init --recursive, Installing submodules]
   - ["[[ -d ~/.vim/bundle/Vundle.vim ]] || git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim", Install vundle]
   - ['[[ -d ~/.oh-my-zsh ]] || sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --keep-zshrc', Installing oh-my-zsh]
+  - [./install-scripts/install-basic-utilities.sh, Installing basic utilities]
   - [wget -O ~/.dircolors "https://raw.githubusercontent.com/seebi/dircolors-solarized/master/dircolors.ansi-dark"]
   - [cp zsh/themes/* ~/.oh-my-zsh/themes, Installing custom oh-my-zsh themes]
   - [cp -av zsh/plugins/* ~/.oh-my-zsh/plugins, Installing custom oh-my-zsh plugins]

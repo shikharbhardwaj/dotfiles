@@ -78,6 +78,8 @@ if [ -f '/Users/shikharbhardwaj/google-cloud-sdk/completion.zsh.inc' ]; then . '
 
 export PATH="$PATH:/usr/local/opt/go/libexec/bin"
 export PATH="/usr/local/go/bin:$PATH"
+export PATH="/opt/homebrew/bin:$PATH"
+
 export GOPATH="$HOME/Documents/workspace/go"
 export PATH="$GOPATH/bin:$PATH"
 export PKG_CONFIG_PATH="$PKG_CONFIG_PATH:/usr/local/lib/pkgconfig"
