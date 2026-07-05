@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DEST_PATH="$HOME/custom/bin"
+DEST_PATH="$HOME/bin"
 cd $DEST_PATH
 
 OS=$(uname -s)

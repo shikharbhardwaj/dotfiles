@@ -1,6 +1,6 @@
 #!/bin/bash
 
-UTILITIES="curl wget htop glances jq"
+UTILITIES="curl wget htop glances jq fish"
 
 # Use apt-get on Ubuntu/Debian and brew on MacOS
 if [ "$(uname)" == "Darwin" ]; then
