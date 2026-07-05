@@ -11,14 +11,12 @@
 
 - link:
     ~/.tmux.conf: tmux/tmux.conf
-    ~/.vim: vim
     ~/.config/nvim: nvim
     ~/.config/fish/config.fish: fish/config.fish
     ~/bin: custom/bin
 
 - shell:
   - [git submodule update --init --recursive, Installing submodules]
-  - ["[[ -d ~/.vim/bundle/Vundle.vim ]] || git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim", Install vundle]
   - [./install-scripts/install-basic-utilities.sh, Installing basic utilities]
   - [wget -O ~/.dircolors "https://raw.githubusercontent.com/seebi/dircolors-solarized/master/dircolors.ansi-dark"]
   - [mkdir -p ~/.tmux/plugins && cp -av tmux/plugins/* ~/.tmux/plugins, Installing tmux plugins]
