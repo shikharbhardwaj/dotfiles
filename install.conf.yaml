@@ -8,11 +8,13 @@
     - ~/downloads
     - ~/.config
     - ~/.config/fish
+    - ~/.config/mise
 
 - link:
     ~/.tmux.conf: tmux/tmux.conf
     ~/.config/nvim: nvim
     ~/.config/fish/config.fish: fish/config.fish
+    ~/.config/mise/config.toml: mise/config.toml
     ~/bin: custom/bin
 
 - shell:
