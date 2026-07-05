@@ -1,0 +1,12 @@
+[tools]
+go = "latest"
+rust = { version = "latest", components = "rustfmt,clippy,rust-analyzer" }
+node = { version = "lts", corepack = true }
+pnpm = "latest"
+"npm:typescript" = { version = "latest", depends = ["node"] }
+python = "latest"
+uv = "latest"
+
+[settings]
+# Use uv (rather than plain venv/pip) to create and activate Python virtualenvs.
+python.uv_venv_auto = "create|source"

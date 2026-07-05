@@ -32,17 +32,9 @@ function vim
     nvim $argv
 end
 
-# Version managers
+# Version manager (Go, Rust, Node, Python — see mise/config.toml)
 if type -q mise
     mise activate fish | source
-end
-
-if type -q nodenv
-    nodenv init - fish | source
-end
-
-if type -q pyenv
-    pyenv init --path | source
 end
 
 # Local, machine-specific overrides (gitignored)
