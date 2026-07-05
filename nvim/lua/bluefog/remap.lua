@@ -22,11 +22,6 @@ vim.keymap.set("n", "<leader>Y", [["+Y]])
 
 vim.keymap.set("n", "Q", "<nop>")
 
--- Format buffer.
-vim.keymap.set("n", "<leader>f", function()
-    vim.lsp.buf.format()
-end)
-
 -- Quickfix navigation.
 vim.keymap.set("n", "<C-Up>", "<cmd>cnext<CR>zz")
 vim.keymap.set("n", "<C-Down>", "<cmd>cprev<CR>zz")

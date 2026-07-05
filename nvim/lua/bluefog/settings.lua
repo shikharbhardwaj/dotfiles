@@ -14,8 +14,7 @@ vim.opt.linebreak = true
 vim.opt.showbreak = "…"
 
 -- Code folding
-vim.opt.foldmethod = "expr"
-vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+vim.opt.foldmethod = "indent"
 vim.cmd(":set nofoldenable")
 
 -- Autosave settings

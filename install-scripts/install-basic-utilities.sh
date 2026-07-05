@@ -7,6 +7,6 @@ if [ "$(uname)" == "Darwin" ]; then
   brew install $UTILITIES
 elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
   sudo apt-get update
-  # build-essential is needed for nvim-treesitter to compile parsers
+  # build-essential is needed as a linker for Rust toolchains installed via mise
   sudo apt-get install -y $UTILITIES build-essential
 fi
