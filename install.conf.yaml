@@ -18,6 +18,7 @@
 - shell:
   - [git submodule update --init --recursive, Installing submodules]
   - [./install-scripts/install-basic-utilities.sh, Installing basic utilities]
+  - ['[[ -x "$(command -v mise)" ]] || curl https://mise.run | sh', Installing mise]
   - [wget -O ~/.dircolors "https://raw.githubusercontent.com/seebi/dircolors-solarized/master/dircolors.ansi-dark"]
   - [mkdir -p ~/.tmux/plugins && cp -av tmux/plugins/* ~/.tmux/plugins, Installing tmux plugins]
   - [./install-scripts/install-packer.sh, Installing neovim plugin manager (packer)]
