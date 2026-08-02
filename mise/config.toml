@@ -6,6 +6,9 @@ pnpm = "latest"
 "npm:typescript" = { version = "latest", depends = ["node"] }
 python = "latest"
 uv = "latest"
+k9s = "latest"
+kubectl = "1.36"
+neovim = "latest"
 
 [settings]
 # Use uv (rather than plain venv/pip) to create and activate Python virtualenvs.
