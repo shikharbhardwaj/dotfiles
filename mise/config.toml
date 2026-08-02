@@ -4,6 +4,7 @@ rust = { version = "latest", components = "rustfmt,clippy,rust-analyzer" }
 node = { version = "lts", corepack = true }
 pnpm = "latest"
 "npm:typescript" = { version = "latest", depends = ["node"] }
+"npm:@earendil-works/pi-coding-agent" = { version = "latest", depends = ["node"] }
 python = "latest"
 uv = "latest"
 k9s = "latest"
