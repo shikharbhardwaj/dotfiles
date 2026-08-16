@@ -10,6 +10,8 @@ uv = "latest"
 k9s = "latest"
 kubectl = "1.36"
 neovim = "latest"
+codex = "latest"
+helm = "latest"
 
 [settings]
 # Use uv (rather than plain venv/pip) to create and activate Python virtualenvs.
