@@ -34,13 +34,11 @@ function vim
     nvim $argv
 end
 
-# Version manager (Go, Rust, Node, Python — see mise/config.toml)
-if type -q mise
-    mise activate fish | source
-end
 
 # Local, machine-specific overrides (gitignored)
 set -l dotfiles_dir (realpath (dirname (status --current-filename))/..)
 if test -f $dotfiles_dir/custom/scripts/extra.fish
     source $dotfiles_dir/custom/scripts/extra.fish
 end
+
+/home/gliese/.local/bin/mise activate fish | source # added by https://mise.run/fish
