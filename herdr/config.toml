@@ -1,0 +1,49 @@
+# herdr configuration
+# Managed by dotfiles — see install.conf.yaml
+#
+# Prefix key to enter prefix mode (default: "ctrl+b").
+# Kept in sync with tmux's prefix (C-a) in tmux/tmux.conf.
+[keys]
+prefix = "ctrl+a"
+
+# --- Splits (mirror tmux | and -) ---
+# tmux: bind | split-window -h  /  bind - split-window -v
+split_vertical = "prefix+|"
+split_horizontal = "prefix+minus"
+
+# --- Pane focus (mirror tmux-navigator h/j/k/l) ---
+focus_pane_left = "prefix+h"
+focus_pane_down = "prefix+j"
+focus_pane_up = "prefix+k"
+focus_pane_right = "prefix+l"
+
+# Cycle panes back-and-forth (tmux-ish pane cycling)
+cycle_pane_next = "prefix+tab"
+
+# --- Pane actions (tmux-ish) ---
+zoom = "prefix+z"          # legacy alias: fullscreen
+close_pane = "prefix+x"
+edit_scrollback = "prefix+e"
+resize_mode = "prefix+r"
+toggle_sidebar = "prefix+b"
+
+# --- Tabs (= tmux windows) ---
+new_tab = "prefix+c"
+rename_tab = "prefix+shift+t"
+switch_tab = "prefix+1..9"
+previous_tab = "prefix+p"
+next_tab = "prefix+n"
+close_tab = "prefix+shift+x"
+
+# --- Workspaces (herdr-specific; no tmux equivalent) ---
+workspace_picker = "prefix+w"
+new_workspace = "prefix+shift+n"
+rename_workspace = "prefix+shift+w"
+close_workspace = "prefix+shift+d"
+goto = "prefix+g"
+
+# --- Misc ---
+help = "prefix+?"
+settings = "prefix+s"
+detach = "prefix+q"
+reload_config = "prefix+shift+r"

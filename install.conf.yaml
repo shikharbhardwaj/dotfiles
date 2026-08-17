@@ -12,6 +12,7 @@
 
 - link:
     ~/.tmux.conf: tmux/tmux.conf
+    ~/.config/herdr/config.toml: herdr/config.toml
     ~/.config/nvim: nvim
     ~/.config/fish/config.fish: fish/config.fish
     ~/.config/mise/config.toml: mise/config.toml
