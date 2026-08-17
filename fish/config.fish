@@ -1,5 +1,7 @@
 if status is-interactive
     set -gx TERM xterm-256color
+    # Warn if the dotfiles repo is behind upstream.
+    dotfiles_status
 end
 
 # PATH
