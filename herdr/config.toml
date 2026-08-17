@@ -12,10 +12,12 @@ split_vertical = "prefix+|"
 split_horizontal = "prefix+minus"
 
 # --- Pane focus (mirror tmux-navigator h/j/k/l) ---
-focus_pane_left = "prefix+h"
-focus_pane_down = "prefix+j"
-focus_pane_up = "prefix+k"
-focus_pane_right = "prefix+l"
+# Direct (no prefix) to match tmux `bind -n C-h/j/k/l`. herdr is the
+# multiplexer here, so these must live in herdr, not tmux.conf.
+focus_pane_left = "ctrl+h"
+focus_pane_down = "ctrl+j"
+focus_pane_up = "ctrl+k"
+focus_pane_right = "ctrl+l"
 
 # Cycle panes back-and-forth (tmux-ish pane cycling)
 cycle_pane_next = "prefix+tab"
