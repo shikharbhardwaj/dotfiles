@@ -9,10 +9,12 @@
     - ~/.config
     - ~/.config/fish
     - ~/.config/mise
+    - ~/.pi/agent
 
 - link:
     ~/.tmux.conf: tmux/tmux.conf
     ~/.config/herdr/config.toml: herdr/config.toml
+    ~/.pi/agent/settings.json: pi/settings.json
     ~/.config/nvim: nvim
     ~/.config/fish/config.fish: fish/config.fish
     ~/.config/mise/config.toml: mise/config.toml
