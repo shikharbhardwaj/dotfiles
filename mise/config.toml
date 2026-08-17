@@ -13,6 +13,11 @@ neovim = "latest"
 codex = "latest"
 helm = "latest"
 herdr = "latest"
+gh = "latest"
+glow = "latest"
+chromedriver = "latest"
+argocd = "latest"
+tokei = "latest"
 
 [settings]
 # Use uv (rather than plain venv/pip) to create and activate Python virtualenvs.
