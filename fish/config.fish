@@ -41,4 +41,4 @@ if test -f $dotfiles_dir/custom/scripts/extra.fish
     source $dotfiles_dir/custom/scripts/extra.fish
 end
 
-/home/gliese/.local/bin/mise activate fish | source # added by https://mise.run/fish
+$HOME/.local/bin/mise activate fish | source # added by https://mise.run/fish
