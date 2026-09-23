@@ -10,6 +10,7 @@
     - ~/.config/fish
     - ~/.config/mise
     - ~/.pi/agent
+    - ~/.claude/skills
 
 - link:
     ~/.tmux.conf: tmux/tmux.conf
@@ -20,6 +21,12 @@
     ~/.config/fish/functions: fish/functions
     ~/.config/mise/config.toml: mise/config.toml
     ~/bin: custom/bin
+    ~/.claude/CLAUDE.md:
+      path: claude/CLAUDE.md
+      force: true
+    ~/.claude/skills/jeremy-review:
+      path: claude/skills/jeremy-review
+      force: true
 
 - shell:
   - [git submodule update --init --recursive, Installing submodules]
