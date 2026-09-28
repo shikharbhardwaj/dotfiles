@@ -2,6 +2,11 @@ if status is-interactive
     set -gx TERM xterm-256color
     # Warn if the dotfiles repo is behind upstream.
     dotfiles_status
+    # Tell herdr which host this workspace lives on ($hostname token in its sidebar).
+    if set -q HERDR_WORKSPACE_ID
+        herdr workspace report-metadata $HERDR_WORKSPACE_ID --source hostname \
+            --token hostname=(prompt_hostname) >/dev/null 2>&1
+    end
 end
 
 # PATH
